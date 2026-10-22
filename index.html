@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام | ETMAM - حلول مهنية متكاملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a0e17;
+            --primary-dark: #2c080e;
+            --accent: #c9a45c;
+            --accent-light: #f3e5ab;
+            --bg-light: #f9f9fb;
+            --text-dark: #222222;
+            --text-light: #666666;
+            --white: #ffffff;
+            
+            /* ألوان مراس للتدريب */
+            --meras-navy: #2b3974;
+            --meras-green: #1a8252;
+            --meras-bg: #f2f5fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-area img {
+            height: 52px;
+            width: auto;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            object-fit: contain;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .logo-area h1 {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .logo-area span {
+            font-size: 0.8rem;
+            color: #ddd;
+            display: block;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 8, 14, 0.9), rgba(74, 14, 23, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 110px 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 750px;
+            margin: 0 auto 30px;
+            color: #f0f0f0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--primary-dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(201, 164, 92, 0.4);
+        }
+
+        .btn:hover {
+            background-color: #dfb76c;
+            transform: translateY(-2px);
+        }
+
+        /* Sections General Styling */
+        section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        /* Jobs Section */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .job-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .job-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .job-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .job-info span i {
+            color: var(--accent);
+            margin-left: 5px;
+        }
+
+        /* Section Meras Training */
+        #courses {
+            background-color: var(--meras-bg);
+            border-top: 3px solid var(--meras-green);
+            border-bottom: 3px solid var(--meras-navy);
+        }
+
+        .meras-header-banner {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .meras-header-banner img {
+            max-width: 220px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .meras-header-banner h2 {
+            color: var(--meras-navy);
+            font-size: 2.3rem;
+            font-weight: 800;
+        }
+
+        .meras-header-banner p {
+            color: var(--meras-green);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .courses-sub-title {
+            color: var(--meras-navy);
+            font-size: 1.5rem;
+            margin: 35px 0 20px;
+            border-right: 4px solid var(--meras-green);
+            padding-right: 12px;
+        }
+
+        .courses-grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .course-item-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+
+        .course-item-card:hover {
+            border-color: var(--meras-green);
+            transform: translateY(-4px);
+        }
+
+        .course-item-card h4 {
+            color: var(--meras-navy);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .course-item-card h4 i {
+            color: var(--meras-green);
+        }
+
+        .btn-meras {
+            background-color: var(--meras-navy);
+            color: var(--white);
+            text-align: center;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .btn-meras:hover {
+            background-color: var(--meras-green);
+        }
+
+        /* Portfolio / Proofs Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 25px;
+        }
+
+        .portfolio-item {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            text-align: center;
+            padding-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            object-position: top;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .portfolio-item h4 {
+            margin: 15px 0 5px;
+            color: var(--primary);
+        }
+
+        .portfolio-item p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            padding: 0 15px;
+        }
+
+        /* Contact & Social Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+            border-top: 3px solid var(--accent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            background: rgba(255,255,255,0.1);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        @media(max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo-area">
+                <!-- صورة اللوجو من المستودع مع الرابط الصحيح -->
+                <img src="logo.PNG" alt="شعار إتمام">
+                <div>
+                    <h1>إتمام | ETMAM</h1>
+                    <span>شريكك في الخدمة والحلول المهنية</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">الرئيسية</a></li>
+                    <li><a href="#jobs">الوظائف اليومية</a></li>
+                    <li><a href="#courses">الدورات والبرامج</a></li>
+                    <li><a href="#portfolio">معرض الأعمال</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <h2>لبناء وتطوير مسارك الوظيفي والمهني</h2>
+            <p>حلول مهنية متكاملة، برامج الماجستير المهنية، دورات التأهيل للشهادات الاحترافية، وفرص وظيفية حقيقية وصناعة سير ذاتية معتمدة.</p>
+            <a href="https://wa.me/966561089688" target="_blank" class="btn"><i class="fab fa-whatsapp"></i> تواصل عبر واتساب فوراً</a>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section id="jobs">
+        <div class="container">
+            <div class="section-title">
+                <h2>الوظائف الشاغرة اليومية</h2>
+                <p>تحديثات يومية لأحدث فرص العمل والشواغر في كبرى الشركات بمختلف التخصصات</p>
+            </div>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <h3>خدمة عملاء ومبيعات</h3>
+                    <div class="job-info">
+                        <span><i class="fas fa-map-marker-alt"></i> السعودية</span>
+                        <span><i class="fas fa-clock"></i> متجدد يومياً</span>
+                    </div>
+                    <p>فرص عمل فورية ورواتب مجزية في كبرى الشركات بمختلف التخصصات.</p>
+                    <br>
+                    <a href="https://wa.me/966561089688" target="_blank" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">التقديم الفوري عبر واتساب</a>
+                </div>
+                <div class="job-card">
+                    <h3>محاسب وإدارة مالية</h3>
+                    <div class="job-info">
+                        <span><i class="fas fa-map-marker-alt"></i> حضورياً / عن بُعد</span>
+                        <span><i class="fas fa-clock"></i> محدث اليوم</span>
+                    </div>
+                    <p>شواغر عاجلة لمحاسبين معتمدين في المؤسسات التجارية والشركات.</p>
+                    <br>
+                    <a href="https://wa.me/966561089688" target="_blank" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">التقديم الفوري عبر واتساب</a>
+                </div>
+                <div class="job-card">
+                    <h3>أخصائي موارد بشرية (HR)</h3>
+                    <div class="job-info">
+                        <span><i class="fas fa-map-marker-alt"></i> القطاع الإداري</span>
+                        <span><i class="fas fa-clock"></i> متجدد يومياً</span>
+                    </div>
+                    <p>وظائف شاغرة في مجالات الموارد البشرية وتطوير الكفاءات.</p>
+                    <br>
+                    <a href="https://wa.me/966561089688" target="_blank" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">التقديم الفوري عبر واتساب</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section Meras -->
+    <section id="courses">
+        <div class="container">
+            <div class="meras-header-banner">
+                <img src="cropped-merass-e1742765349271.png" alt="مراس للتدريب والتطوير المهني">
+                <h2>مراس للتدريب والتطوير المهني</h2>
+                <p>Meras for Training & Professional Development</p>
+            </div>
+
+            <!-- Master Programs -->
+            <h3 class="courses-sub-title"><i class="fas fa-graduation-cap"></i> برامج الماجستير المهنية المعتمدة</h3>
+            <div class="courses-grid-list">
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> إدارة الأعمال المتقدمة – MBA</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج ماجستير إدارة الأعمال MBA" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> إدارة الموارد البشرية</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج ماجستير إدارة الموارد البشرية" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> الحوكمة وإدارة المخاطر والامتثال GRC</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج ماجستير GRC" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> إدارة المشاريع</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج ماجستير إدارة المشاريع" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> الصحة النفسية</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج ماجستير الصحة النفسية" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> التخطيط الاستراتيجي وإدارة الجودة</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج ماجستير التخطيط الاستراتيجي" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> العلاقات العامة والتسويق</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج العلاقات العامة والتسويق" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> إدارة التقنية والتحول الرقمي</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج التحول الرقمي" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> التسويق والمبيعات</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج التسويق والمبيعات" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> السلامة والصحة المهنية</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج السلامة والصحة المهنية" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> المحاسبة والإدارة المالية</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج المحاسبة والإدارة المالية" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-award"></i> علم النفس التربوي</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج علم النفس التربوي" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <h3 class="courses-sub-title"><i class="fas fa-certificate"></i> تأهيل لشهادات إحترافية</h3>
+            <div class="courses-grid-list">
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> البرنامج المتكامل فى إدارة المشاريع</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن تأهيل إدارة المشاريع" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> البرنامج المتكامل فى إدارة الموارد البشرية</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن تأهيل الموارد البشرية" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> برنامج إدارة التقنية والتحول الرقمي</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن تأهيل التقنية والتحول الرقمي" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> زمالة الهيئة السعودية (SOCPA Fellowship)</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج تأهيل SOCPA" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> برنامج التخطيط الاستراتيجي وإدارة الجودة</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج إدارة الجودة" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> برنامج التسويق والمبيعات</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن برنامج تأهيل التسويق" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> برنامج السلامة والصحة المهنية</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن تأهيل السلامة والصحة المهنية" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> برنامج المحاسبة والإدارة المالية</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن تأهيل الإدارة المالية" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> برنامج محترف إدارة المخاطر RMP</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن تأهيل RMP" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> محترف إدارة المكاتب التكاملة P3O®</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن تأهيل P3O" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+                <div class="course-item-card">
+                    <h4><i class="fas fa-check-circle"></i> مساعد محترف إدارة مشاريع – شهادة CAPM</h4>
+                    <a href="https://wa.me/966561089688?text=استفسار عن تأهيل CAPM" target="_blank" class="btn-meras">سجل أو استفسر الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>معرض أعمال السير الذاتية وآراء العملاء</h2>
+                <p>نماذج حقيقية من تقييمات الـ ATS المعتمدة ومحادثات ثقة عملائنا عبر واتساب</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="WhatsApp Image 2026-10-22 at 5.48.42 PM.jpeg" alt="تقييم سيرة ذاتية ATS 100%">
+                    <h4>سيرة ذاتية ATS معتمدة (100%)</h4>
+                    <p>فحص اجتياز أنظمة الفرز الآلي بنسبة 100% لمستشار تطوير تنظيمي.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="WhatsApp Image 2026-10-22 at 5.49.26 PM (1).jpeg" alt="تقييم سيرة ذاتية ATS باللغة الإنجليزية">
+                    <h4>سيرة ذاتية بالإنجليزية ATS (100%)</h4>
+                    <p>فحص اجتياز أنظمة ATS الكامل لخريجي إدارة الأعمال والمالية.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="WhatsApp Image 2026-10-22 at 5.49.26 PM.jpeg" alt="محادثة واتساب تسليم سيرة ذاتية">
+                    <h4>رأي عميل وتسليم الخدمة</h4>
+                    <p>تسليم ملفات ATS الجاهزة والدعاء بالتوفيق عبر الواتساب.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="WhatsApp Image 2026-10-22 at 5.49.27 PM.jpeg" alt="محادثة واتساب شكر عميل">
+                    <h4>ثقة وآراء العملاء</h4>
+                    <p>انطباعات وسعادة العملاء بجودة وتأثير السير الذاتية المصممة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>عن شركة إتمام (ETMAM)</h3>
+                    <p>شريكك في الخدمة والحلول الإلكترونية والمهنية. نقدم خدمات التوظيف الاحترافي، صناعة السير الذاتية، ودورات التطوير المهني لبناء مستقبلك.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>معلومات التواصل</h3>
+                    <p><i class="fas fa-phone-alt"></i> رقم الهاتف / واتساب: +966 56 108 9688</p>
+                    <p><i class="fas fa-envelope"></i> البريد الإلكتروني: etmamjob1@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> متوفر لخدمتكم على مدار اليوم</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط منصات إتمام الرسمية</h3>
+                    <p>تفضل بمتابعة حساباتنا الرسمية:</p>
+                    <div class="social-links">
+                        <a href="https://x.com/Etmamjob" target="_blank" title="منصة إكس (X)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/etmam-center-ksa/" target="_blank" title="لينكد إن (LinkedIn)"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://t.me/etmam_ksa" target="_blank" title="تيليجرام (Telegram)"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://www.instagram.com/etmamksa?stkn=NWRiMnd2aXpremJs&utm_source=qr" target="_blank" title="إنستجرام (Instagram)"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/966561089688" target="_blank" title="واتساب (WhatsApp)"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع حقوق الطبع والنشر محفوظة لشركة إتمام | ETMAM © 2026</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
