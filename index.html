@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام | الخدمات المهنية وجمع وتسهيل الفرص الوظيفية</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4a0e17;       /* عنابي فاخر */
+            --primary-dark: #2c080e;  /* عنابي غامق */
+            --accent: #d4af37;        /* ذهبي فاخر */
+            --accent-light: #f3e5ab;  /* ذهبي فاتح */
+            --bg-light: #fcfbf9;      /* أوف وايت */
+            --text-dark: #1f2937;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Gold Gradient Animations */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #d4af37 0%, #fff7ad 50%, #aa771c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border {
+            border-image: linear-gradient(135deg, #d4af37, #aa771c) 1;
+        }
+
+        /* Hero Background with Pattern */
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(74, 14, 23, 0.96) 0%, rgba(44, 8, 14, 0.98) 100%),
+                        url('https://www.transparenttextures.com/patterns/cubes.png');
+        }
+
+        /* Cards Hover Effects */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(74, 14, 23, 0.15), 0 10px 10px -5px rgba(74, 14, 23, 0.04);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Modal Backdrop animation */
+        .modal-fade {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .modal-fade.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Custom Toast Notification */
+        .custom-alert {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: var(--primary-dark);
+            color: #fff;
+            border: 2px solid var(--accent);
+            padding: 14px 22px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(150%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .custom-alert.active {
+            transform: translateY(0);
+        }
+
+        /* Mobile menu drawer transition */
+        .mobile-drawer {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        .mobile-drawer.active {
+            transform: translateX(0);
+        }
+
+        .job-badge {
+            background: rgba(212, 175, 55, 0.15);
+            color: #8a6d1b;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .job-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .job-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -5px rgba(74, 14, 23, 0.1);
+        }
+
+        .job-card h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .job-desc-snippet {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .btn-job-details {
+            background: var(--primary);
+            color: #ffffff;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .btn-job-details:hover {
+            background: var(--primary-dark);
+            color: var(--accent-light);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-gradient-to-r from-[#4a0e17] via-[#380a11] to-[#2c080e] text-white sticky top-0 z-50 shadow-lg border-b border-yellow-600/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3">
+                    <img id="headerEtmamLogo" src="logo.PNG" alt="لوجو إتمام" class="h-14 w-14 object-contain rounded-full border-2 border-[#d4af37] shadow-md bg-white p-0.5" onerror="this.src='https://placehold.co/100x100/4a0e17/ffffff?text=ETMAM'">
+                    <div>
+                        <span class="text-xl sm:text-2xl font-extrabold gold-gradient-text tracking-wide block">إتمام | ETMAM</span>
+                        <span class="text-xs text-yellow-200/80 font-medium block">تسهيل الوظائف والخدمات المهنية</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-reverse space-x-6 text-sm font-bold">
+                    <a href="#hero" class="hover:text-[#d4af37] transition">الرئيسية</a>
+                    <a href="#jobs" class="hover:text-[#d4af37] transition">الفرص الوظيفية</a>
+                    <a href="#meras" class="hover:text-[#d4af37] transition">دورات مراس</a>
+                    <a href="#services" class="hover:text-[#d4af37] transition">الخدمات المهنية</a>
+                    <a href="#testimonials" class="hover:text-[#d4af37] transition">آراء العملاء</a>
+                    <a href="#contact" class="hover:text-[#d4af37] transition">تواصل معنا</a>
+                </nav>
+
+                <!-- Actions Button -->
+                <div class="hidden md:flex items-center gap-3">
+                    <button onclick="window.openAdminAuthModal()" class="bg-yellow-500/10 hover:bg-yellow-500/20 text-[#d4af37] border border-[#d4af37]/40 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                        <i class="fas fa-user-shield text-sm"></i>
+                        لوحة المدير
+                    </button>
+                    <a id="heroWhatsappBtn" href="#" target="_blank" class="bg-[#d4af37] hover:bg-[#b89528] text-[#2c080e] font-extrabold px-5 py-2.5 rounded-xl text-xs shadow-md transition flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        تواصل مباشر
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Hamburger Button -->
+                <div class="md:hidden flex items-center gap-2">
+                    <button onclick="window.openAdminAuthModal()" class="text-[#d4af37] p-2">
+                        <i class="fas fa-user-shield text-lg"></i>
+                    </button>
+                    <button onclick="window.toggleMobileMenu()" class="text-white focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE DRAWER MENU -->
+    <div id="mobileDrawer" class="mobile-drawer fixed inset-y-0 right-0 z-50 w-64 bg-[#2c080e] text-white p-6 shadow-2xl md:hidden border-l border-[#d4af37]/30">
+        <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+            <span class="font-bold gold-gradient-text">قائمة التصفح</span>
+            <button onclick="window.toggleMobileMenu()" class="text-gray-300 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-5 text-sm font-bold">
+            <a href="#hero" onclick="window.toggleMobileMenu()" class="hover:text-[#d4af37]">الرئيسية</a>
+            <a href="#jobs" onclick="window.toggleMobileMenu()" class="hover:text-[#d4af37]">الفرص الوظيفية</a>
+            <a href="#meras" onclick="window.toggleMobileMenu()" class="hover:text-[#d4af37]">دورات مراس</a>
+            <a href="#services" onclick="window.toggleMobileMenu()" class="hover:text-[#d4af37]">الخدمات المهنية</a>
+            <a href="#testimonials" onclick="window.toggleMobileMenu()" class="hover:text-[#d4af37]">آراء العملاء</a>
+            <a href="#contact" onclick="window.toggleMobileMenu()" class="hover:text-[#d4af37]">تواصل معنا</a>
+        </nav>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-bg text-white py-20 px-4 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-block bg-white/10 backdrop-blur-md text-[#f3e5ab] border border-[#d4af37]/40 text-xs font-extrabold px-4 py-1.5 rounded-full mb-6">
+                ✨ منصتكم الأولى لإتمام الخدمات المهنية والتوظيف
+            </span>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+                طريقك إلى <span class="gold-gradient-text">المستقبل المهني</span> يبدأ مع إتمام
+            </h1>
+            <p class="text-base sm:text-xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
+                يا بعد حيي، نسعى لتسهيل وصولكم لأفضل الفرص الوظيفية وتطوير سيركم الذاتية للتوافق 100% مع أنظمة الـ ATS وتطوير مهاراتكم عبر برامج مراس للتدريب المعتمد!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#jobs" class="w-full sm:w-auto bg-[#d4af37] hover:bg-[#b89528] text-[#2c080e] font-extrabold px-8 py-4 rounded-xl text-base shadow-lg transition transform hover:-translate-y-1">
+                    استعراض الفرص الوظيفية <i class="fas fa-briefcase mr-2"></i>
+                </a>
+                <button onclick="window.openModal('adviceModal')" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold px-8 py-4 rounded-xl text-base backdrop-blur-sm transition">
+                    نصيحة اليوم المهنية <i class="fas fa-lightbulb mr-2 text-yellow-300"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- JOBS SECTION -->
+    <section id="jobs" class="py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-[#4a0e17] mb-3">أحدث الفرص الوظيفية المتاحة</h2>
+            <p class="text-gray-600 text-sm sm:text-base">وظائف محدثة يومياً للباحثين عن التميز في سوق العمل السعودي</p>
+            <div class="w-24 h-1 bg-[#d4af37] mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div id="jobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic jobs populated via Firebase JS -->
+        </div>
+    </section>
+
+    <!-- MERAS TRAINING SECTION -->
+    <section id="meras" class="py-16 px-4 bg-gradient-to-b from-white to-amber-50/40 border-y border-amber-200/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="flex justify-center mb-4">
+                    <img id="merasLogoImg" src="cropped-merass-e1742765349271_4.png" alt="لوجو مراس للتدريب والتطوير المهني" class="h-28 sm:h-36 object-contain filter drop-shadow-md" onerror="this.src='https://placehold.co/300x120/ffffff/2b3974?text=Meras+Training'">
+                </div>
+                <p class="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto font-medium">شريككم الاستراتيجي لتطوير الكوادر الوطنية وتقديم الدورات الاحترافية والتطوير المهني المستمر</p>
+                <div class="w-24 h-1 bg-blue-900 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm card-hover text-center">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-900 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="font-extrabold text-lg text-gray-800 mb-2">شهادات معتمدة</h3>
+                    <p class="text-sm text-gray-600">برامج تدريبية تمنحك شهادات معتمدة لتعزيز سيرتك الذاتية في سوق العمل.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm card-hover text-center">
+                    <div class="w-14 h-14 bg-emerald-100 text-emerald-900 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="font-extrabold text-lg text-gray-800 mb-2">مدربون خبراء</h3>
+                    <p class="text-sm text-gray-600">نخبة من المدربين والمستشارين المعتمدين ونقل الخبرات العملية المباشرة.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm card-hover text-center">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-900 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fas fa-laptop-house"></i>
+                    </div>
+                    <h3 class="font-extrabold text-lg text-gray-800 mb-2">تدريب حضوري وعن بُعد</h3>
+                    <p class="text-sm text-gray-600">مرونة فائقة بالتحاقك بالدورات التدريبية في أي وقت ومن أي مكان بالمملكة.</p>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="#" class="wa-dynamic-btn inline-flex items-center gap-2 bg-[#2b3974] hover:bg-blue-950 text-white font-bold px-8 py-3.5 rounded-xl shadow-md transition" data-msg="استفسار عن برامج ودورات مراس التدريبية">
+                    <i class="fab fa-whatsapp text-xl text-green-400"></i>
+                    استفسر عن برامج مراس التدريبية
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROFESSIONAL SERVICES SECTION -->
+    <section id="services" class="py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-[#4a0e17] mb-3">خدماتنا المهنية الاحترافية</h2>
+            <p class="text-gray-600 text-sm sm:text-base">نساعدك بخبرتنا في كتابة وتطوير سيرتك وحساباتك لتصدر ترشيحات الوظائف</p>
+            <div class="w-24 h-1 bg-[#d4af37] mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Service 1: CV Writing -->
+            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm card-hover flex flex-col justify-between">
+                <div>
+                    <div class="w-16 h-16 bg-amber-100 text-[#4a0e17] rounded-2xl flex items-center justify-center mb-6 text-3xl font-bold">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-800 mb-3">تعديل وصياغة السيرة الذاتية (ATS)</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                        صياغة سيرة ذاتية متوافقة 100% مع خوارزميات الـ ATS باللغتين العربية والإنجليزية، وإبراز نقاط القوة والمهارات المفتاحية التي يطلبها مسؤول التوظيف.
+                    </p>
+                </div>
+                <a href="#" class="wa-dynamic-btn block text-center bg-[#4a0e17] hover:bg-[#2c080e] text-white font-bold py-3 rounded-xl transition shadow-md" data-msg="السلام عليكم، أرغب في طلب خدمة تعديل وصياغة السيرة الذاتية (ATS)">
+                    اطلب الخدمة الآن <i class="fas fa-arrow-left mr-2"></i>
+                </a>
+            </div>
+
+            <!-- Service 2: LinkedIn Optimization -->
+            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm card-hover flex flex-col justify-between">
+                <div>
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center mb-6 text-3xl font-bold">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-800 mb-3">تحسين وبناء ملف لينكد إن (LinkedIn)</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                        تحسين واستغلال حسابك على منصة LinkedIn، صياغة نبذة احترافية، تحسين الكلمات المفتاحية لمجالك ليزداد ظهورك أمام مسؤولي التوظيف والشركات الكبرى.
+                    </p>
+                </div>
+                <a href="#" class="wa-dynamic-btn block text-center bg-[#4a0e17] hover:bg-[#2c080e] text-white font-bold py-3 rounded-xl transition shadow-md" data-msg="السلام عليكم، أرغب في طلب خدمة تطوير وتجهيز حساب لينكد إن (LinkedIn)">
+                    اطلب الخدمة الآن <i class="fas fa-arrow-left mr-2"></i>
+                </a>
+            </div>
+
+            <!-- Service 3: Career Coaching -->
+            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm card-hover flex flex-col justify-between">
+                <div>
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mb-6 text-3xl font-bold">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-800 mb-3">الاستشارات والتدريب للمقابلات</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                        جلسات استشارية فردية لإعدادك وتجهيزك للمقابلات الشخصية (Job Interviews)، توجيهك الوظيفي، وتحديد المسار المهني الأنسب لخبرتك ومؤهلاتك.
+                    </p>
+                </div>
+                <a href="#" class="wa-dynamic-btn block text-center bg-[#4a0e17] hover:bg-[#2c080e] text-white font-bold py-3 rounded-xl transition shadow-md" data-msg="السلام عليكم، أرغب في طلب خدمة الاستشارة والتدريب للمقابلات الشخصية">
+                    اطلب الخدمة الآن <i class="fas fa-arrow-left mr-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS & ATS EVALUATIONS -->
+    <section id="testimonials" class="py-16 px-4 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold bg-[#d4af37]/20 text-[#8a6d1b] px-3 py-1 rounded-full uppercase tracking-wider">نتائج حقيقية</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-[#4a0e17] mt-2 mb-3">آراء العملاء وتقييمات السير الذاتية (ATS)</h2>
+                <p class="text-gray-600 text-sm sm:text-base">نعتز بثقة عملاؤنا وبتحقيق سيرهم الذاتية أعلى التقييمات في أنظمة التوظيف 100% Parse Rate</p>
+                <div class="w-24 h-1 bg-[#d4af37] mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Testimonial Item 1 -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 card-hover">
+                    <img id="testiImg1" src="https://placehold.co/400x320/4a0e17/ffffff?text=100%+ATS+Parse+Rate" alt="تقييم 100% ATS" class="w-full h-56 object-cover rounded-xl border mb-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">100% Read by ATS</span>
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Item 2 -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 card-hover">
+                    <img id="testiImg2" src="https://placehold.co/400x320/4a0e17/ffffff?text=100%+ATS+Parse+Rate" alt="تقييم 100% ATS" class="w-full h-56 object-cover rounded-xl border mb-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">0% Missed Details</span>
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Item 3 -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 card-hover">
+                    <img id="testiImg3" src="https://placehold.co/400x320/2b3974/ffffff?text=WhatsApp+Feedback" alt="محادثة عميل واتساب" class="w-full h-56 object-cover rounded-xl border mb-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">انطباع عميل</span>
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Item 4 -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 card-hover">
+                    <img id="testiImg4" src="https://placehold.co/400x320/2b3974/ffffff?text=WhatsApp+Feedback" alt="محادثة عميل واتساب" class="w-full h-56 object-cover rounded-xl border mb-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">توفيق وقبول</span>
+                        <div class="text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER & CONTACT -->
+    <footer id="contact" class="bg-gradient-to-r from-[#2c080e] via-[#4a0e17] to-[#1f0509] text-white pt-16 pb-8 border-t-4 border-[#d4af37]">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10">
+            
+            <!-- About Footer -->
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="logo.PNG" alt="إتمام" class="h-10 w-10 object-contain rounded-full bg-white p-0.5" onerror="this.src='https://placehold.co/80x80/ffffff/4a0e17?text=ETMAM'">
+                    <span class="text-xl font-bold gold-gradient-text">إتمام | ETMAM</span>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                    منصة سعودية متميزة تسعى لتطوير وتمكين الكفاءات الوطنية وتوفير الحلول المهنية المتكاملة وبناء السير الذاتية المتوافقة مع الأنظمة الحديثة.
+                </p>
+                <div class="flex items-center gap-3">
+                    <a id="linkX" href="https://x.com/Etmamjob" target="_blank" class="w-9 h-9 bg-white/10 hover:bg-[#d4af37] hover:text-[#2c080e] rounded-full flex items-center justify-center transition">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a id="linkLinkedin" href="https://www.linkedin.com/company/etmam-center-ksa/" target="_blank" class="w-9 h-9 bg-white/10 hover:bg-[#d4af37] hover:text-[#2c080e] rounded-full flex items-center justify-center transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a id="linkTelegram" href="https://t.me/etmam_ksa" target="_blank" class="w-9 h-9 bg-white/10 hover:bg-[#d4af37] hover:text-[#2c080e] rounded-full flex items-center justify-center transition">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <a id="linkInstagram" href="https://www.instagram.com/etmamksa" target="_blank" class="w-9 h-9 bg-white/10 hover:bg-[#d4af37] hover:text-[#2c080e] rounded-full flex items-center justify-center transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-lg font-bold text-[#d4af37] mb-4">روابط سريعة</h4>
+                <ul class="space-y-2.5 text-sm text-gray-300 font-medium">
+                    <li><a href="#jobs" class="hover:text-[#d4af37] transition"><i class="fas fa-chevron-left text-xs ml-2 text-yellow-500"></i>الوظائف الشاغرة</a></li>
+                    <li><a href="#meras" class="hover:text-[#d4af37] transition"><i class="fas fa-chevron-left text-xs ml-2 text-yellow-500"></i>برامج مراس للتدريب</a></li>
+                    <li><a href="#services" class="hover:text-[#d4af37] transition"><i class="fas fa-chevron-left text-xs ml-2 text-yellow-500"></i>خدمة الـ ATS والسيرة الذاتية</a></li>
+                    <li><a href="#testimonials" class="hover:text-[#d4af37] transition"><i class="fas fa-chevron-left text-xs ml-2 text-yellow-500"></i>تقييمات وآراء العملاء</a></li>
+                </ul>
+            </div>
+
+            <!-- Direct Contact Details -->
+            <div>
+                <h4 class="text-lg font-bold text-[#d4af37] mb-4">تواصل معنا المباشر</h4>
+                <ul class="space-y-3 text-sm text-gray-300">
+                    <li class="flex items-center gap-3">
+                        <i class="fab fa-whatsapp text-green-400 text-xl"></i>
+                        <span dir="ltr" id="footerPhoneDisplay">+966561089688</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="far fa-envelope text-yellow-300 text-lg"></i>
+                        <span id="footerEmailDisplay">etmamjob1@gmail.com</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-map-marker-alt text-red-400 text-lg"></i>
+                        <span>المملكة العربية السعودية - الرياض</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+            <p>© 2026 جميع الحقوق محفوظة لـ <strong>إتمام (ETMAM)</strong></p>
+            <p class="text-gray-500">تم التطوير والربط بالسحابة المباشرة لخدمتكم 🇸🇦</p>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: JOB DETAILS MODAL -->
+    <div id="jobDetailsModal" class="modal-fade fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden border border-amber-500/30">
+            <div class="bg-gradient-to-r from-[#4a0e17] to-[#2c080e] p-6 text-white flex justify-between items-start">
+                <div>
+                    <span id="modalJobBadge" class="job-badge mb-2 inline-block">تأهيل دوام كامل</span>
+                    <h3 id="modalJobTitle" class="text-xl sm:text-2xl font-black gold-gradient-text">عنوان الوظيفة</h3>
+                    <p id="modalJobCompany" class="text-xs text-yellow-200 mt-1">جهة العمل</p>
+                </div>
+                <button onclick="window.closeModal('jobDetailsModal')" class="text-gray-300 hover:text-white text-xl p-1">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center gap-4 text-sm text-gray-600 mb-6 bg-gray-50 p-3 rounded-xl">
+                    <span><i class="fas fa-map-marker-alt text-red-500 ml-1"></i> <span id="modalJobLocation">الرياض</span></span>
+                    <span><i class="fas fa-clock text-blue-500 ml-1"></i> دوام كامل</span>
+                </div>
+
+                <h4 class="font-bold text-[#4a0e17] mb-2 text-base">وصف الوظيفة والمتطلبات:</h4>
+                <div id="modalJobDesc" class="text-gray-700 text-sm leading-relaxed whitespace-pre-line mb-8 bg-amber-50/30 p-4 rounded-xl border border-amber-100">
+                    تفاصيل الوظيفة ستظهر هنا...
+                </div>
+
+                <div class="flex gap-4">
+                    <a id="modalJobApplyBtn" href="#" target="_blank" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-extrabold text-center py-3.5 rounded-xl shadow-md transition flex justify-center items-center gap-2">
+                        <i class="fab fa-whatsapp text-xl"></i> التقديم المباشر عبر الواتساب
+                    </a>
+                    <button onclick="window.closeModal('jobDetailsModal')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold px-6 py-3.5 rounded-xl transition">
+                        إغلاق
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: DAILY ADVICE POPUP (SAUDI DIALECT) -->
+    <div id="adviceModal" class="modal-fade fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 border-2 border-[#d4af37] text-center relative">
+            <button onclick="window.closeModal('adviceModal')" class="absolute top-4 left-4 text-gray-400 hover:text-gray-700 text-xl">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="w-16 h-16 bg-amber-100 text-[#4a0e17] rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner">
+                💡
+            </div>
+
+            <h3 class="text-xl font-black text-[#4a0e17] mb-2">نصيحة اليوم المهنية 🇸🇦</h3>
+            <span class="text-xs text-yellow-700 font-bold bg-yellow-100 px-3 py-1 rounded-full inline-block mb-4">لك وللمجتمع الوظيفي</span>
+
+            <p id="adviceTextModal" class="text-gray-800 text-base sm:text-lg font-bold leading-relaxed mb-6 bg-amber-50/60 p-4 rounded-xl border border-amber-200/60">
+                يا بعد حيي، سيرة الـ ATS هي مفتاحك الأول للمقابلة الشخصية! رتّب الكلمات المفتاحية بالإنجليزية والعربي وضبط المهارات بالشكل الصح وتشوف الخوارزميات شلون تفتح لك الأبواب. توكل على الله!
+            </p>
+
+            <button onclick="window.closeModal('adviceModal')" class="w-full bg-[#4a0e17] hover:bg-[#2c080e] text-[#d4af37] font-extrabold py-3 rounded-xl transition shadow-md">
+                أبشر بالخير، تم! 👍
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: ADMIN AUTHENTICATION -->
+    <div id="adminAuthModal" class="modal-fade fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 border border-gray-200 text-center">
+            <div class="w-14 h-14 bg-red-100 text-[#4a0e17] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-[#4a0e17] mb-1">تسجيل دخول مدير الموقع</h3>
+            <p class="text-xs text-gray-500 mb-6">أدخل كلمة المرور الخاصة بالإدارة للوصول للوحة التعديل</p>
+
+            <form id="adminLoginForm">
+                <div class="mb-4 text-right">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">كلمة المرور:</label>
+                    <input type="password" id="adminPasswordInput" class="w-full border border-gray-300 px-4 py-3 rounded-xl focus:ring-2 focus:ring-[#4a0e17] focus:outline-none" placeholder="••••••••" required>
+                </div>
+
+                <div id="authErrorMsg" class="text-red-600 text-xs font-bold mb-4 hidden">
+                    ❌ كلمة المرور غير صحيحة، حاول مجدداً.
+                </div>
+
+                <div class="flex gap-3">
+                    <button type="submit" class="flex-1 bg-[#4a0e17] hover:bg-[#2c080e] text-white font-bold py-3 rounded-xl transition">
+                        دخول اللوحة
+                    </button>
+                    <button type="button" onclick="window.closeModal('adminAuthModal')" class="bg-gray-200 text-gray-700 font-bold px-5 py-3 rounded-xl">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: FULL ADMIN DASHBOARD -->
+    <div id="adminDashboardModal" class="modal-fade fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl overflow-y-auto border-2 border-[#d4af37] p-6">
+            
+            <div class="flex justify-between items-center border-b pb-4 mb-6">
+                <div>
+                    <h3 class="text-2xl font-black text-[#4a0e17]">لوحة التحكم المباشرة بالمركّز السحابي</h3>
+                    <p class="text-xs text-green-600 font-bold flex items-center gap-1 mt-1">
+                        <span class="w-2 h-2 rounded-full bg-green-500 inline-block animate-pulse"></span> متصل بالسحابة (أي تعديل يتحدث فوراً لجميع الزوار)
+                    </p>
+                </div>
+                <button onclick="window.closeModal('adminDashboardModal')" class="text-gray-400 hover:text-red-600 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="space-y-8">
+                
+                <!-- Admin Section 1: Contact & Social Settings -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                    <h4 class="font-extrabold text-[#4a0e17] mb-4 flex items-center gap-2">
+                        <i class="fas fa-[#d4af37] fa-phone-alt"></i> إعدادات أرقام التواصل والتواصل الاجتماعي
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">رقم الواتساب الرئيسي (بدون +):</label>
+                            <input type="text" id="adminPhoneInput" class="w-full border px-3 py-2 rounded-lg" placeholder="966561089688">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">البريد الإلكتروني (Gmail):</label>
+                            <input type="email" id="adminEmailInput" class="w-full border px-3 py-2 rounded-lg" placeholder="etmamjob1@gmail.com">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">رابط حساب منصة X (تويتر):</label>
+                            <input type="text" id="adminXInput" class="w-full border px-3 py-2 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">رابط حساب LinkedIn:</label>
+                            <input type="text" id="adminLinkedinInput" class="w-full border px-3 py-2 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">رابط قناة Telegram:</label>
+                            <input type="text" id="adminTelegramInput" class="w-full border px-3 py-2 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">رابط حساب Instagram:</label>
+                            <input type="text" id="adminInstagramInput" class="w-full border px-3 py-2 rounded-lg">
+                        </div>
+                    </div>
+                    <button onclick="window.saveContactSettings()" class="mt-4 bg-[#4a0e17] hover:bg-[#2c080e] text-[#d4af37] px-6 py-2 rounded-lg font-bold text-sm shadow">
+                        حفظ بيانات التواصل فوراً 💾
+                    </button>
+                </div>
+
+                <!-- Admin Section 2: Daily Advice -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                    <h4 class="font-extrabold text-[#4a0e17] mb-4 flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-yellow-500"></i> تعديل النصيحة اليومية (اللهجة السعودية)
+                    </h4>
+                    <textarea id="adminAdviceInput" rows="3" class="w-full border p-3 rounded-xl text-sm font-bold" placeholder="اكتب النصيحة التي تظهر للزائر فور فتح الموقع..."></textarea>
+                    <button onclick="window.saveNewAdvice()" class="mt-3 bg-[#4a0e17] hover:bg-[#2c080e] text-[#d4af37] px-6 py-2 rounded-lg font-bold text-sm shadow">
+                        تحديث النصيحة لجميع الزوار 💡
+                    </button>
+                </div>
+
+                <!-- Admin Section 3: Manage Logos (URL or Desktop Upload) -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                    <h4 class="font-extrabold text-[#4a0e17] mb-4 flex items-center gap-2">
+                        <i class="fas fa-image"></i> إدارة الشعارات (لوجو إتمام ولوجو مراس)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">لوجو إتمام (رابط أو رفع ملف):</label>
+                            <input type="text" id="adminEtmamLogoInput" class="w-full border px-3 py-2 rounded-lg mb-2" placeholder="اسم الملف أو الرابط">
+                            <input type="file" accept="image/*" onchange="window.handleFileUpload(this, 'adminEtmamLogoInput')" class="text-xs">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">لوجو مراس (رابط أو رفع ملف):</label>
+                            <input type="text" id="adminMerasLogoInput" class="w-full border px-3 py-2 rounded-lg mb-2" placeholder="اسم الملف أو الرابط">
+                            <input type="file" accept="image/*" onchange="window.handleFileUpload(this, 'adminMerasLogoInput')" class="text-xs">
+                        </div>
+                    </div>
+                    <button onclick="window.saveNewLogos()" class="mt-4 bg-[#4a0e17] text-[#d4af37] px-6 py-2 rounded-lg font-bold text-sm shadow">
+                        حفظ وتحديث الشعارات 🎨
+                    </button>
+                </div>
+
+                <!-- Admin Section 4: Manage Testimonial & ATS Images -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                    <h4 class="font-extrabold text-[#4a0e17] mb-4 flex items-center gap-2">
+                        <i class="fas fa-star text-yellow-500"></i> إدارات صور تقييمات السير الذاتية وآراء العملاء (4 صور)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="border p-3 rounded-lg bg-white">
+                            <label class="block font-bold text-gray-700 mb-1">صورة التقييم 1 (ATS Rate):</label>
+                            <input type="text" id="adminTestimonial1" class="w-full border px-3 py-1.5 rounded mb-2 text-xs">
+                            <input type="file" accept="image/*" onchange="window.handleFileUpload(this, 'adminTestimonial1')" class="text-xs">
+                        </div>
+                        <div class="border p-3 rounded-lg bg-white">
+                            <label class="block font-bold text-gray-700 mb-1">صورة التقييم 2 (ATS Rate):</label>
+                            <input type="text" id="adminTestimonial2" class="w-full border px-3 py-1.5 rounded mb-2 text-xs">
+                            <input type="file" accept="image/*" onchange="window.handleFileUpload(this, 'adminTestimonial2')" class="text-xs">
+                        </div>
+                        <div class="border p-3 rounded-lg bg-white">
+                            <label class="block font-bold text-gray-700 mb-1">صورة المحادثة 3 (WhatsApp):</label>
+                            <input type="text" id="adminTestimonial3" class="w-full border px-3 py-1.5 rounded mb-2 text-xs">
+                            <input type="file" accept="image/*" onchange="window.handleFileUpload(this, 'adminTestimonial3')" class="text-xs">
+                        </div>
+                        <div class="border p-3 rounded-lg bg-white">
+                            <label class="block font-bold text-gray-700 mb-1">صورة المحادثة 4 (WhatsApp):</label>
+                            <input type="text" id="adminTestimonial4" class="w-full border px-3 py-1.5 rounded mb-2 text-xs">
+                            <input type="file" accept="image/*" onchange="window.handleFileUpload(this, 'adminTestimonial4')" class="text-xs">
+                        </div>
+                    </div>
+                    <button onclick="window.saveTestimonialImages()" class="mt-4 bg-[#4a0e17] text-[#d4af37] px-6 py-2 rounded-lg font-bold text-sm shadow">
+                        حفظ وتحديث صور التقييمات ⭐
+                    </button>
+                </div>
+
+                <!-- Admin Section 5: Add New Job -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                    <h4 class="font-extrabold text-[#4a0e17] mb-4 flex items-center gap-2">
+                        <i class="fas fa-plus-circle text-green-600"></i> إضافة وظيفة جديدة للعامة
+                    </h4>
+                    <form onsubmit="window.handleAddNewJob(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-4">
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">المسمى الوظيفي:</label>
+                                <input type="text" id="jobTitleInput" class="w-full border px-3 py-2 rounded-lg" placeholder="مثال: أخصائي موارد بشرية" required>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">اسم الشركة / القطاع:</label>
+                                <input type="text" id="jobCompanyInput" class="w-full border px-3 py-2 rounded-lg" placeholder="مثال: شركة استثمارية" required>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">المدينة / المنطقة:</label>
+                                <input type="text" id="jobLocationInput" class="w-full border px-3 py-2 rounded-lg" placeholder="الرياض / جدة..." required>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">نوع الدوام:</label>
+                                <select id="jobTypeInput" class="w-full border px-3 py-2 rounded-lg font-bold">
+                                    <option value="دوام كامل">دوام كامل</option>
+                                    <option value="دوام جزئي">دوام جزئي</option>
+                                    <option value="عن بُعد">عن بُعد</option>
+                                    <option value="عقد محدد">عقد محدد</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block font-bold text-gray-700 mb-1 text-sm">وصف الوظيفة والاشتراطات:</label>
+                            <textarea id="jobDescInput" rows="4" class="w-full border p-3 rounded-lg text-sm" placeholder="اكتب تفاصيل المهارات المطلوبة وكيفية المتابعة..." required></textarea>
+                        </div>
+                        <button type="submit" class="bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-2.5 rounded-xl font-bold text-sm shadow">
+                            نشر الوظيفة فوراً على الموقع 🚀
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Admin Section 6: Manage Current Jobs -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                    <h4 class="font-extrabold text-[#4a0e17] mb-4 flex items-center gap-2">
+                        <i class="fas fa-list"></i> الوظائف الشاغرة المعروضة حالياً (حذف أو إدارة)
+                    </h4>
+                    <div id="adminJobsList" class="space-y-3">
+                        <!-- Dynamic job deletion list -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Alert UI -->
+    <div id="customToast" class="custom-alert">
+        <i class="fas fa-check-circle" style="color: var(--accent); font-size: 1.2rem;"></i>
+        <span id="toastMsg">تم الحفظ بنجاح</span>
+    </div>
+
+    <!-- SCRIPT LOGIC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase Configuration & Initialization
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "dummy-key",
+            authDomain: "dummy.firebaseapp.com",
+            projectId: "dummy-project"
+        };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'etmam-official-site';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        // Default initial fallbacks
+        const defaultAdvice = "يا بعد حيي، سيرة الـ ATS هي مفتاحك الأول للمقابلة الشخصية! رتّب الكلمات المفتاحية بالإنجليزية والعربي وضبط المهارات بالشكل الصح وتشوف الخوارزميات شلون تفتح لك الأبواب. توكل على الله!";
+        const defaultEtmamLogo = "logo.PNG";
+        const defaultMerasLogo = "cropped-merass-e1742765349271_4.png";
+        
+        const defaultContacts = {
+            phone: "966561089688",
+            email: "etmamjob1@gmail.com",
+            x: "https://x.com/Etmamjob",
+            linkedin: "https://www.linkedin.com/company/etmam-center-ksa/",
+            telegram: "https://t.me/etmam_ksa",
+            instagram: "https://www.instagram.com/etmamksa"
+        };
+
+        const defaultTestimonials = [
+            "https://placehold.co/400x320/4a0e17/ffffff?text=100%+ATS+Parse+Rate",
+            "https://placehold.co/400x320/4a0e17/ffffff?text=100%+ATS+Parse+Rate",
+            "https://placehold.co/400x320/2b3974/ffffff?text=WhatsApp+Feedback",
+            "https://placehold.co/400x320/2b3974/ffffff?text=WhatsApp+Feedback"
+        ];
+
+        const defaultJobs = [
+            {
+                id: 1,
+                title: "أخصائي موارد بشرية (HR Specialist)",
+                company: "مجموعة استثمارية كبرى",
+                location: "الرياض",
+                type: "دوام كامل",
+                desc: "مطلوب أخصائي HR خبرة لا تقل عن سنتين في قطاع الشركة بالمملكة.\n• معرفة تامة بنظام العمل السعودي ونظام قوى وممارسات التأمينات الاجتماعية.\n• إجادة متابعة الحضور والغياب وصياغة عقود العمل وتطوير الأداء.\n• إجادة استخدام الحاسب واللغة الإنجليزية."
+            },
+            {
+                id: 2,
+                title: "محاسب عام ومالي",
+                company: "شركة تجارية وخدمية",
+                location: "جدة",
+                type: "دوام كامل",
+                desc: "مطلوب محاسب عام للعمل بمقر الشركة الرئيسي بجدة.\n• إعداد القوائم المالية وإقرارات ضريبة القيمة المضافة VAT.\n• التعامل مع البرامج المحاسبية (ZOHO / Odoo).\n• بكالوريوس محاسبة مع إمكانية التسجيل بالهيئة السعودية SOCPA."
+            }
+        ];
+
+        // Global State loaded live from Cloud Firestore
+        window.cloudData = {
+            advice: defaultAdvice,
+            contacts: defaultContacts,
+            logos: { etmam: defaultEtmamLogo, meras: defaultMerasLogo },
+            testimonials: defaultTestimonials,
+            jobs: defaultJobs
+        };
+
+        // Custom Toast Notification instead of alert()
+        window.showToast = function(msg) {
+            const toast = document.getElementById('customToast');
+            const msgSpan = document.getElementById('toastMsg');
+            if (msgSpan) msgSpan.innerText = msg;
+            if (toast) {
+                toast.classList.add('active');
+                setTimeout(() => {
+                    toast.classList.remove('active');
+                }, 3500);
+            }
+        };
+
+        window.toggleMobileMenu = function() {
+            const drawer = document.getElementById('mobileDrawer');
+            if (drawer) drawer.classList.toggle('active');
+        };
+
+        window.openModal = function(id) { 
+            const el = document.getElementById(id);
+            if (el) el.classList.add('active'); 
+        };
+        
+        window.closeModal = function(id) { 
+            const el = document.getElementById(id);
+            if (el) el.classList.remove('active'); 
+        };
+
+        window.handleFileUpload = function(inputElement, targetInputId) {
+            const file = inputElement.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const targetEl = document.getElementById(targetInputId);
+                    if (targetEl) targetEl.value = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        // Render UI Elements based on Live Cloud Data safely with null-checks
+        window.renderUI = function() {
+            const contacts = window.cloudData.contacts || defaultContacts;
+            
+            const phoneEl = document.getElementById('footerPhoneDisplay');
+            if (phoneEl) phoneEl.innerText = "+" + (contacts.phone || '');
+
+            const emailEl = document.getElementById('footerEmailDisplay');
+            if (emailEl) emailEl.innerText = contacts.email || '';
+
+            const linkX = document.getElementById('linkX');
+            if (linkX) linkX.href = contacts.x || '#';
+
+            const linkLinkedin = document.getElementById('linkLinkedin');
+            if (linkLinkedin) linkLinkedin.href = contacts.linkedin || '#';
+
+            const linkTelegram = document.getElementById('linkTelegram');
+            if (linkTelegram) linkTelegram.href = contacts.telegram || '#';
+
+            const linkInstagram = document.getElementById('linkInstagram');
+            if (linkInstagram) linkInstagram.href = contacts.instagram || '#';
+
+            const linkWhatsapp = document.getElementById('linkWhatsapp');
+            if (linkWhatsapp) linkWhatsapp.href = `https://wa.me/${contacts.phone}`;
+            
+            const waBtns = document.querySelectorAll('.wa-dynamic-btn');
+            waBtns.forEach(btn => {
+                const msg = encodeURIComponent(btn.getAttribute('data-msg') || 'استفسار عن خدمات إتمام');
+                btn.href = `https://wa.me/${contacts.phone}?text=${msg}`;
+            });
+
+            const heroWaBtn = document.getElementById('heroWhatsappBtn');
+            if (heroWaBtn) {
+                heroWaBtn.href = `https://wa.me/${contacts.phone}?text=${encodeURIComponent('يا هلا، أبشر بخدمتكم وأستفسر عن خدمات إتمام')}`;
+            }
+
+            const logos = window.cloudData.logos || {};
+            const etmamLogo = document.getElementById('headerEtmamLogo');
+            if (etmamLogo) etmamLogo.src = logos.etmam || defaultEtmamLogo;
+
+            const merasLogo = document.getElementById('merasLogoImg');
+            if (merasLogo) merasLogo.src = logos.meras || defaultMerasLogo;
+
+            const testimonials = window.cloudData.testimonials || defaultTestimonials;
+            const t1 = document.getElementById('testiImg1');
+            if (t1 && testimonials[0]) t1.src = testimonials[0];
+
+            const t2 = document.getElementById('testiImg2');
+            if (t2 && testimonials[1]) t2.src = testimonials[1];
+
+            const t3 = document.getElementById('testiImg3');
+            if (t3 && testimonials[2]) t3.src = testimonials[2];
+
+            const t4 = document.getElementById('testiImg4');
+            if (t4 && testimonials[3]) t4.src = testimonials[3];
+
+            const adviceText = document.getElementById('adviceTextModal');
+            if (adviceText) adviceText.innerText = window.cloudData.advice || defaultAdvice;
+
+            renderJobsUI();
+        };
+
+        function renderJobsUI() {
+            const jobs = window.cloudData.jobs || [];
+            const container = document.getElementById('jobsGrid');
+            const adminContainer = document.getElementById('adminJobsList');
+            
+            if (!container || !adminContainer) return;
+
+            container.innerHTML = '';
+            adminContainer.innerHTML = '';
+
+            if (jobs.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 20px;">لا توجد وظائف معروضة حالياً.</p>';
+            }
+
+            jobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.onclick = () => window.openJobDetails(job.id);
+                card.innerHTML = `
+                    <div>
+                        <span class="job-badge">${job.type}</span>
+                        <h3>${job.title}</h3>
+                        <div class="job-meta">
+                            <span><i class="fas fa-building"></i> ${job.company}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
+                        </div>
+                        <p class="job-desc-snippet">${job.desc}</p>
+                    </div>
+                    <button class="btn-job-details">تفاصيل الوظيفة والتقديم <i class="fas fa-arrow-left"></i></button>
+                `;
+                container.appendChild(card);
+
+                const adminItem = document.createElement('div');
+                adminItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #f1f5f9;';
+                adminItem.innerHTML = `
+                    <div>
+                        <strong style="color: var(--primary); font-size: 0.9rem;">${job.title}</strong>
+                        <span style="font-size: 0.75rem; color: #64748b; display: block;">${job.company} - ${job.location}</span>
+                    </div>
+                    <button onclick="window.deleteJob(${job.id})" style="background: #fee2e2; color: #dc2626; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;"><i class="fas fa-trash"></i> حذف</button>
+                `;
+                adminContainer.appendChild(adminItem);
+            });
+        }
+
+        window.openJobDetails = function(jobId) {
+            const jobs = window.cloudData.jobs || [];
+            const job = jobs.find(j => j.id === jobId);
+            if (!job) return;
+
+            const contacts = window.cloudData.contacts || defaultContacts;
+
+            const badge = document.getElementById('modalJobBadge');
+            if (badge) badge.innerText = job.type;
+
+            const title = document.getElementById('modalJobTitle');
+            if (title) title.innerText = job.title;
+
+            const company = document.getElementById('modalJobCompany');
+            if (company) company.innerText = job.company;
+
+            const location = document.getElementById('modalJobLocation');
+            if (location) location.innerText = job.location;
+
+            const desc = document.getElementById('modalJobDesc');
+            if (desc) desc.innerText = job.desc;
+
+            const applyBtn = document.getElementById('modalJobApplyBtn');
+            if (applyBtn) {
+                const waMsg = encodeURIComponent(`يا هلا إتمام، أبغى أقدم على وظيفة: (${job.title}) - ${job.company}`);
+                applyBtn.href = `https://wa.me/${contacts.phone}?text=${waMsg}`;
+            }
+
+            window.openModal('jobDetailsModal');
+        };
+
+        window.openAdminAuthModal = function() {
+            const passInput = document.getElementById('adminPasswordInput');
+            if (passInput) passInput.value = '';
+
+            const err = document.getElementById('authErrorMsg');
+            if (err) err.style.display = 'none';
+
+            window.openModal('adminAuthModal');
+        };
+
+        // Helper to bind form listener safely
+        function initAdminLoginForm() {
+            const loginForm = document.getElementById('adminLoginForm');
+            if (!loginForm) return;
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const passInput = document.getElementById('adminPasswordInput');
+                const inputPass = passInput ? passInput.value.trim() : '';
+                
+                if (inputPass === '1234567Mm') {
+                    window.closeModal('adminAuthModal');
+                    
+                    const contacts = window.cloudData.contacts || defaultContacts;
+                    const phoneIn = document.getElementById('adminPhoneInput');
+                    if (phoneIn) phoneIn.value = contacts.phone || '';
+
+                    const emailIn = document.getElementById('adminEmailInput');
+                    if (emailIn) emailIn.value = contacts.email || '';
+
+                    const xIn = document.getElementById('adminXInput');
+                    if (xIn) xIn.value = contacts.x || '';
+
+                    const linkedinIn = document.getElementById('adminLinkedinInput');
+                    if (linkedinIn) linkedinIn.value = contacts.linkedin || '';
+
+                    const telegramIn = document.getElementById('adminTelegramInput');
+                    if (telegramIn) telegramIn.value = contacts.telegram || '';
+
+                    const instaIn = document.getElementById('adminInstagramInput');
+                    if (instaIn) instaIn.value = contacts.instagram || '';
+
+                    const adviceIn = document.getElementById('adminAdviceInput');
+                    if (adviceIn) adviceIn.value = window.cloudData.advice || defaultAdvice;
+                    
+                    const logos = window.cloudData.logos || {};
+                    const etmamLogoIn = document.getElementById('adminEtmamLogoInput');
+                    if (etmamLogoIn) etmamLogoIn.value = logos.etmam || defaultEtmamLogo;
+
+                    const merasLogoIn = document.getElementById('adminMerasLogoInput');
+                    if (merasLogoIn) merasLogoIn.value = logos.meras || defaultMerasLogo;
+
+                    const testimonials = window.cloudData.testimonials || defaultTestimonials;
+                    const t1In = document.getElementById('adminTestimonial1');
+                    if (t1In) t1In.value = testimonials[0] || '';
+
+                    const t2In = document.getElementById('adminTestimonial2');
+                    if (t2In) t2In.value = testimonials[1] || '';
+
+                    const t3In = document.getElementById('adminTestimonial3');
+                    if (t3In) t3In.value = testimonials[2] || '';
+
+                    const t4In = document.getElementById('adminTestimonial4');
+                    if (t4In) t4In.value = testimonials[3] || '';
+
+                    window.openModal('adminDashboardModal');
+                } else {
+                    const err = document.getElementById('authErrorMsg');
+                    if (err) err.style.display = 'block';
+                }
+            });
+        }
+
+        // Push updates live to Firestore Document
+        async function saveCloudDoc(updatedFields) {
+            if (!currentUser) {
+                window.showToast("جاري الاتصال بالسحابة... يرجى إعادة المحاولة خلال ثوانٍ");
+                return;
+            }
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteConfig', 'main');
+                await setDoc(docRef, updatedFields, { merge: true });
+            } catch (err) {
+                console.error("Firestore Save Error:", err);
+                window.showToast("تعذر التحديث المباشر: " + err.message);
+            }
+        }
+
+        window.saveContactSettings = async function() {
+            const getVal = (id) => {
+                const el = document.getElementById(id);
+                return el ? el.value.trim() : '';
+            };
+
+            const contacts = {
+                phone: getVal('adminPhoneInput'),
+                email: getVal('adminEmailInput'),
+                x: getVal('adminXInput'),
+                linkedin: getVal('adminLinkedinInput'),
+                telegram: getVal('adminTelegramInput'),
+                instagram: getVal('adminInstagramInput')
+            };
+            await saveCloudDoc({ contacts });
+            window.showToast('تم حفظ وتحديث بيانات التواصل لجميع الزوار فوراً! 🚀');
+        };
+
+        window.saveNewLogos = async function() {
+            const getVal = (id) => {
+                const el = document.getElementById(id);
+                return el ? el.value.trim() : '';
+            };
+
+            const logos = {
+                etmam: getVal('adminEtmamLogoInput'),
+                meras: getVal('adminMerasLogoInput')
+            };
+            await saveCloudDoc({ logos });
+            window.showToast('تم حفظ وتحديث الشعارات لجميع الزوار! 🎨');
+        };
+
+        window.saveTestimonialImages = async function() {
+            const getVal = (id) => {
+                const el = document.getElementById(id);
+                return el ? el.value.trim() : '';
+            };
+
+            const testimonials = [
+                getVal('adminTestimonial1'),
+                getVal('adminTestimonial2'),
+                getVal('adminTestimonial3'),
+                getVal('adminTestimonial4')
+            ];
+            await saveCloudDoc({ testimonials });
+            window.showToast('تم حفظ وتحديث صور التقييمات لجميع الزوار! ⭐');
+        };
+
+        window.saveNewAdvice = async function() {
+            const adviceEl = document.getElementById('adminAdviceInput');
+            const advice = adviceEl ? adviceEl.value.trim() : '';
+            if (advice) {
+                await saveCloudDoc({ advice });
+                window.showToast('تم تحديث النصيحة اليومية للجميع! 💡');
+            }
+        };
+
+        window.handleAddNewJob = async function(e) {
+            e.preventDefault();
+            const currentJobs = window.cloudData.jobs || [];
+
+            const getVal = (id) => {
+                const el = document.getElementById(id);
+                return el ? el.value.trim() : '';
+            };
+
+            const newJob = {
+                id: Date.now(),
+                title: getVal('jobTitleInput'),
+                company: getVal('jobCompanyInput'),
+                location: getVal('jobLocationInput'),
+                type: getVal('jobTypeInput') || 'دوام كامل',
+                desc: getVal('jobDescInput')
+            };
+            const updatedJobs = [newJob, ...currentJobs];
+            await saveCloudDoc({ jobs: updatedJobs });
+            
+            ['jobTitleInput', 'jobCompanyInput', 'jobLocationInput', 'jobDescInput'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+
+            window.showToast('تم نشر الوظيفة الجديدة مباشرة لجميع الأجهزة! 🎉');
+        };
+
+        window.deleteJob = async function(jobId) {
+            let jobs = window.cloudData.jobs || [];
+            jobs = jobs.filter(j => j.id !== jobId);
+            await saveCloudDoc({ jobs });
+            window.showToast('تم حذف الوظيفة وتحديث الصفحة للجميع 👍');
+        };
+
+        // Firebase Auth Setup & Live Snapshot Listener
+        async function initCloudSync() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (authErr) {
+                console.error("Auth error:", authErr);
+            }
+
+            onAuthStateChanged(auth, (user) => {
+                if (!user) return;
+                currentUser = user;
+
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteConfig', 'main');
+                
+                // Real-time Cloud Listener across all visitors
+                onSnapshot(docRef, (snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.data();
+                        window.cloudData = {
+                            advice: data.advice || defaultAdvice,
+                            contacts: data.contacts || defaultContacts,
+                            logos: data.logos || { etmam: defaultEtmamLogo, meras: defaultMerasLogo },
+                            testimonials: data.testimonials || defaultTestimonials,
+                            jobs: data.jobs || defaultJobs
+                        };
+                    } else {
+                        // Seed initial collection document if empty
+                        setDoc(docRef, {
+                            advice: defaultAdvice,
+                            contacts: defaultContacts,
+                            logos: { etmam: defaultEtmamLogo, meras: defaultMerasLogo },
+                            testimonials: defaultTestimonials,
+                            jobs: defaultJobs
+                        });
+                    }
+                    window.renderUI();
+                }, (error) => {
+                    console.error("Firestore Listen Error:", error);
+                });
+            });
+        }
+
+        window.onload = function() {
+            initAdminLoginForm();
+            window.renderUI();
+            initCloudSync();
+
+            setTimeout(() => { 
+                window.openModal('adviceModal'); 
+            }, 700);
+        };
+    </script>
+</body>
+</html>
