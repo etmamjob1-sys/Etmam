@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام | ETMAM - حلولك المهنية واستشارات التوظيف بالسعودية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a0e17;
+            --primary-dark: #2c080e;
+            --accent: #c9a45c;
+            --accent-light: #f3e5ab;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --meras-blue: #2b3974;
+            --meras-green: #1a8252;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 650px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            background: linear-gradient(135deg, #2c080e, #5a121e);
+            border: 2px solid var(--accent);
+            padding: 4px 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo-img-header {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: #e2e8f0;
+            display: block;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        .admin-btn-nav {
+            background: rgba(201, 164, 92, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent-light) !important;
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(44, 8, 14, 0.88), rgba(74, 14, 23, 0.92)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 90px 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.6rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 750px;
+            margin: 0 auto 30px;
+            color: #f1f5f9;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #e2b868);
+            color: var(--primary-dark);
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(201, 164, 92, 0.4);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 164, 92, 0.6);
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 2.1rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            margin-top: 10px;
+            font-size: 1.05rem;
+        }
+
+        /* Jobs Grid */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .job-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            border-top: 5px solid var(--accent);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .job-badge {
+            background: rgba(201, 164, 92, 0.15);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+
+        .job-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .job-meta span i {
+            color: var(--accent);
+            margin-left: 5px;
+        }
+
+        .job-desc-snippet {
+            color: #475569;
+            font-size: 0.92rem;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .btn-job-details {
+            background: #f1f5f9;
+            color: var(--primary-dark);
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: none;
+            width: 100%;
+        }
+
+        .job-card:hover .btn-job-details {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Meras Section */
+        .meras-section {
+            background-color: #f1f5f9;
+            border-top: 4px solid var(--meras-green);
+            border-bottom: 4px solid var(--meras-blue);
+            padding: 60px 0;
+        }
+
+        .meras-brand-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: #ffffff;
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(43, 57, 116, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .meras-logo-img {
+            max-width: 280px;
+            height: auto;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .meras-category-header {
+            background: linear-gradient(135deg, var(--meras-blue), #1a2347);
+            color: #ffffff;
+            padding: 18px 25px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-right: 6px solid var(--meras-green);
+        }
+
+        .courses-grid-new {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .meras-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .meras-card:hover {
+            border-color: var(--meras-green);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(26, 130, 82, 0.12);
+        }
+
+        .meras-card h4 {
+            color: var(--meras-blue);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meras-card h4 i {
+            color: var(--meras-green);
+            background: rgba(26, 130, 82, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .meras-btn {
+            display: block;
+            text-align: center;
+            background: var(--meras-blue);
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .meras-btn:hover {
+            background: var(--meras-green);
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .portfolio-item {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .portfolio-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(74, 14, 23, 0.1), rgba(201, 164, 92, 0.2));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+            border-top: 4px solid var(--accent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #cbd5e1;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Forms in Modal */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 0.92rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .badge-score {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        @media(max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo-area">
+                <div class="logo-badge">
+                    <img id="headerEtmamLogo" src="logo.PNG" alt="لوجو إتمام" class="logo-img-header" onerror="this.src='https://placehold.co/100x100/4a0e17/c9a45c?text=ETMAM'">
+                    <div class="logo-text">
+                        <h1>إتمام | ETMAM</h1>
+                        <span>شريكك الأول للتطوير والتوظيف</span>
+                    </div>
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">الرئيسية</a></li>
+                    <li><a href="#jobs">أحدث الوظائف</a></li>
+                    <li><a href="#courses">برامج مراس</a></li>
+                    <li><a href="#services">خدماتنا المهنية</a></li>
+                    <li><a href="#testimonials">آراء العملاء</a></li>
+                    <li><a href="#portfolio">تقييمات ATS</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                    <li><button onclick="openAdminAuthModal()" class="admin-btn-nav"><i class="fas fa-user-shield"></i> لوحة المدير</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <h2>يا هلا بك في "إتمام".. طريقك للوظيفة والنجاح المهني!</h2>
+            <p>نختصر عليك المشوار! صمم سيرتك الذاتية متوافقة 100% مع أنظمة الـ ATS، وطور حسابك على لينكد إن، واحصل على جلسات استشارية مهنية متخصصة للارتقاء بمسارك المهني.</p>
+            <a id="heroWhatsappBtn" href="https://wa.me/966561089688?text=يا%20هلا،%20أبشر%20بخدمتكم%20واستفسر%20عن%20خدمات%20إتمام" target="_blank" class="btn-gold"><i class="fab fa-whatsapp"></i> تواصل معنا مباشرة عبر الواتساب</a>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section id="jobs">
+        <div class="container">
+            <div class="section-title">
+                <h2>أحدث الفرص الوظيفية بالسعودية 🚀</h2>
+                <p>فرص حصرية ومستمرة.. اضغط على أي وظيفة للحصول على كامل التفاصيل والتقديم الفوري!</p>
+            </div>
+
+            <div id="jobsGrid" class="jobs-grid">
+                <!-- Dynamic Jobs Loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Meras Courses Section -->
+    <section id="courses" class="meras-section">
+        <div class="container">
+            <div class="meras-brand-header">
+                <img id="merasLogoImg" src="cropped-merass-e1742765349271_4.png" alt="لوجو مراس للتدريب والتطوير المهني" class="meras-logo-img" onerror="this.src='https://placehold.co/280x110/2b3974/ffffff?text=MERAS'">
+                <p style="color: #64748b; font-size: 1.05rem; margin-top: 15px; max-width: 750px; margin-left: auto; margin-right: auto; font-weight: 600;">
+                    بالتعاون والشراكة المباشرة مع "مراس"، نقدم أحدث البرامج التدريبية والماجستير المهني المعتمد لتأهيلك لاقتناص أفضل الفرص في السوق السعودي.
+                </p>
+            </div>
+
+            <!-- Master Programs -->
+            <div class="meras-category-header">
+                <i class="fas fa-user-graduate fa-2x"></i>
+                <div>
+                    <h3 style="font-size: 1.3rem;">برامج الماجستير المهني المعتمد</h3>
+                    <p style="color: #cbd5e1; font-size: 0.85rem;">شهادات احترافية تصنع فارقاً حقيقياً في سيرتك وتطوير قيادتك</p>
+                </div>
+            </div>
+
+            <div class="courses-grid-new">
+                <div class="meras-card">
+                    <h4><i class="fas fa-chart-line"></i> إدارة الأعمال المتقدمة – MBA</h4>
+                    <a href="#" class="meras-btn wa-dynamic-btn" data-msg="يا هلا، أبغى أستفسر عن ماجستير إدارة الأعمال MBA">استفسر وسجل الآن <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="meras-card">
+                    <h4><i class="fas fa-users-cog"></i> إدارة الموارد البشرية HR</h4>
+                    <a href="#" class="meras-btn wa-dynamic-btn" data-msg="يا هلا، أبغى أستفسر عن ماجستير الموارد البشرية">استفسر وسجل الآن <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="meras-card">
+                    <h4><i class="fas fa-shield-alt"></i> الحوكمة والمخاطر والامتثال GRC</h4>
+                    <a href="#" class="meras-btn wa-dynamic-btn" data-msg="يا هلا، أبغى أستفسر عن برنامج الحوكمة GRC">استفسر وسجل الآن <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="meras-card">
+                    <h4><i class="fas fa-tasks"></i> إدارة المشاريع الاحترافية</h4>
+                    <a href="#" class="meras-btn wa-dynamic-btn" data-msg="يا هلا، أبغى أستفسر عن ماجستير إدارة المشاريع">استفسر وسجل الآن <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <!-- Certifications Prep -->
+            <div class="meras-category-header">
+                <i class="fas fa-award fa-2x"></i>
+                <div>
+                    <h3 style="font-size: 1.3rem;">دورات التأهيل للشهادات الاحترافية</h3>
+                    <p style="color: #cbd5e1; font-size: 0.85rem;">تأهيل شامل ومكثف لاجتياز الاختبارات الدولية والمهنية</p>
+                </div>
+            </div>
+
+            <div class="courses-grid-new">
+                <div class="meras-card">
+                    <h4><i class="fas fa-file-invoice-dollar"></i> تأهيل اختبار زمالة SOCPA</h4>
+                    <a href="#" class="meras-btn wa-dynamic-btn" data-msg="يا هلا، أستفسر عن دورة تأهيل اختبار سوكبا SOCPA">التسجيل والاستفسار <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="meras-card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> محترف إدارة المخاطر RMP</h4>
+                    <a href="#" class="meras-btn wa-dynamic-btn" data-msg="يا هلا، أستفسر عن دورة إدارة المخاطر RMP">التسجيل والاستفسار <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="meras-card">
+                    <h4><i class="fas fa-certificate"></i> مساعد محترف إدارة مشاريع CAPM</h4>
+                    <a href="#" class="meras-btn wa-dynamic-btn" data-msg="يا هلا، أستفسر عن دورة CAPM">التسجيل والاستفسار <i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="meras-card">
+                    <h4><i class="fas fa-user-shield"></i> السلامة والصحة المهنية OSHA</h4>
+                    <a href="#" class="meras-btn wa-dynamic-btn" data-msg="يا هلا، أستفسر عن دورة السلامة والصحة المهنية">التسجيل والاستفسار <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" style="background: #ffffff; padding: 70px 0; border-bottom: 1px solid #e2e8f0;">
+        <div class="container">
+            <div class="section-title">
+                <h2>خدماتنا المهنية المتميزة 🌟</h2>
+                <p>حلول متكاملة ومصممة خصيصاً لتجهيزك لسوق العمل السعودي واقتناص أفضل الفرص الوظيفية</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Service 1 -->
+                <div style="background: #f8fafc; border-radius: 20px; padding: 30px; border: 1px solid #e2e8f0; border-top: 6px solid var(--primary); box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 65px; height: 65px; background: rgba(74, 14, 23, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.8rem; margin-bottom: 20px;">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <h3 style="color: var(--primary-dark); font-size: 1.35rem; font-weight: 800; margin-bottom: 12px;">صياغة وتعديل السيرة الذاتية (ATS)</h3>
+                        <p style="color: #475569; font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px;">
+                            نُعيد كتابة وهيكلة سيرتك الذاتية بلغة احترافية (عربي/إنجليزي) متوافقة بنسبة 100% مع أنظمة الفرز الذكي (ATS).
+                        </p>
+                    </div>
+                    <a href="#" class="btn-gold wa-dynamic-btn" data-msg="يا هلا، أبغى أستفسر عن خدمة تعديل وصياغة السيرة الذاتية ATS" style="text-align: center; display: block;"><i class="fab fa-whatsapp"></i> اطلب خدمة السيرة الذاتية</a>
+                </div>
+
+                <!-- Service 2 -->
+                <div style="background: #f8fafc; border-radius: 20px; padding: 30px; border: 1px solid #e2e8f0; border-top: 6px solid #0a66c2; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 65px; height: 65px; background: rgba(10, 102, 194, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #0a66c2; font-size: 1.8rem; margin-bottom: 20px;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <h3 style="color: var(--primary-dark); font-size: 1.35rem; font-weight: 800; margin-bottom: 12px;">تعديل وتحسين ملف لينكد إن (LinkedIn)</h3>
+                        <p style="color: #475569; font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px;">
+                            تحويل حسابك على لينكد إن إلى مغناطيس للفرص الوظيفية وجذب مسؤولي التوظيف بكفاءة.
+                        </p>
+                    </div>
+                    <a href="#" class="btn-gold wa-dynamic-btn" data-msg="يا هلا، أبغى أستفسر عن خدمة تحسين وتطوير حساب لينكد إن" style="text-align: center; display: block; background: linear-gradient(135deg, #0a66c2, #004182); color: #ffffff;"><i class="fab fa-whatsapp"></i> اطلب تطوير ملف لينكد إن</a>
+                </div>
+
+                <!-- Service 3 -->
+                <div style="background: #f8fafc; border-radius: 20px; padding: 30px; border: 1px solid #e2e8f0; border-top: 6px solid var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="width: 65px; height: 65px; background: rgba(201, 164, 92, 0.15); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.8rem; margin-bottom: 20px;">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3 style="color: var(--primary-dark); font-size: 1.35rem; font-weight: 800; margin-bottom: 12px;">الاستشارات المهنية والإرشاد الوظيفي</h3>
+                        <p style="color: #475569; font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px;">
+                            جلسات استشارية خاصة للمحاكاة والتجهيز للمقابلات الشخصية، والتخطيط للنمو المباشر.
+                        </p>
+                    </div>
+                    <a href="#" class="btn-gold wa-dynamic-btn" data-msg="يا هلا، أبغى أحجز جلسة استشارة مهنية وإرشاد وظيفي" style="text-align: center; display: block;"><i class="fab fa-whatsapp"></i> احجز جلسة استشارية</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" style="background: #ffffff; padding: 70px 0;">
+        <div class="container">
+            <div class="section-title">
+                <h2>آراء العملاء وتقييمات السير الذاتية (ATS: 100%) ⭐</h2>
+                <p>نماذج واقعية وتقارير فحص السير الذاتية لأبطال إتمام مع انطباعاتهم ومحادثاتهم بعد استلام خدماتنا</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <div style="background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="height: 320px; background: #000;">
+                        <img id="testiImg1" src="" alt="تقييم 1" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <span style="background: #dcfce7; color: #15803d; font-size: 0.8rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; display: inline-block; margin-bottom: 10px;">ATS Parse Rate: 100%</span>
+                        <h4 style="color: var(--primary-dark); font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">سيرة ذاتية - مستشار موارد بشرية</h4>
+                    </div>
+                </div>
+
+                <div style="background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="height: 320px; background: #000;">
+                        <img id="testiImg2" src="" alt="تقييم 2" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <span style="background: #dcfce7; color: #15803d; font-size: 0.8rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; display: inline-block; margin-bottom: 10px;">ATS Parse Rate: 100%</span>
+                        <h4 style="color: var(--primary-dark); font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">سيرة ذاتية بالإنجليزية - إدارة الأعمال والمالية</h4>
+                    </div>
+                </div>
+
+                <div style="background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="height: 320px; background: #000;">
+                        <img id="testiImg3" src="" alt="تقييم 3" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <span style="background: #fef3c7; color: #92400e; font-size: 0.8rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; display: inline-block; margin-bottom: 10px;">رضا العملاء وثقتهم</span>
+                        <h4 style="color: var(--primary-dark); font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">دعوات طيبة وانطباعات ممتازة</h4>
+                    </div>
+                </div>
+
+                <div style="background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div style="height: 320px; background: #000;">
+                        <img id="testiImg4" src="" alt="تقييم 4" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <span style="background: #fef3c7; color: #92400e; font-size: 0.8rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; display: inline-block; margin-bottom: 10px;">تسليم سريع واحترافي</span>
+                        <h4 style="color: var(--primary-dark); font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">استلام أملس وملفات PDF جاهزة</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>فحص وتصاميم السير الذاتية (ATS) 📄</h2>
+                <p>نضمن لك سيرة ذاتية تضمن مرورك من أنظمة التصفية الذكية بكل ثقة وبأعلى التقييمات</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-icon"><i class="fas fa-file-check"></i></div>
+                    <h4>فحص متوافق 100% مع ATS</h4>
+                    <p>صياغة سيرة ذاتية تنفيذية مقروءة بالكامل بواسطة خوارزميات التوظيف الحديثة بدون أي أخطاء.</p>
+                    <span class="badge-score"><i class="fas fa-check-circle"></i> تقييم ATS: 100%</span>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-icon"><i class="fas fa-language"></i></div>
+                    <h4>صياغة باللغتين العربية والإنجليزية</h4>
+                    <p>ترجمة وصياغة مصطلحات مهنية دقيقة تناسب سوق العمل السعودي والشركات الكبرى.</p>
+                    <span class="badge-score"><i class="fas fa-check-circle"></i> معتمدة ومراجعة</span>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h4>رضا وثقة عملائنا</h4>
+                    <p>استلام سريع وسلاسة بالتعديلات حتى تكون راضي تماماً عن سيرتك الذاتية وتضمن بها المقابلات.</p>
+                    <span class="badge-score" style="background: #fef3c7; color: #92400e;"><i class="fas fa-star"></i> تقييم 5 نجوم</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>عن إتمام (ETMAM)</h3>
+                    <p>منصتك الأولى والوثيقة للحلول المهنية والتوظيف بالسعودية. صياغة سير ذاتية ATS، تأهيل مهني، وربط مع أحدث الوظائف المتاحة بالسوق.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>تواصل معنا مباشرة</h3>
+                    <p><i class="fas fa-phone-alt"></i> هاتف / واتساب: <span id="footerPhoneDisplay">+966 56 108 9688</span></p>
+                    <p><i class="fas fa-envelope"></i> البريد: <span id="footerEmailDisplay">etmamjob1@gmail.com</span></p>
+                    <p><i class="fas fa-clock"></i> خدمة متواصلة طوال اليوم</p>
+                </div>
+                <div class="footer-col">
+                    <h3>حساباتنا الرسمية</h3>
+                    <p>تشرفنا متابعتك لجديد الوظائف والنصائح المهنية:</p>
+                    <div class="social-links">
+                        <a id="linkX" href="https://x.com/Etmamjob" target="_blank" title="منصة إكس"><i class="fab fa-x-twitter"></i></a>
+                        <a id="linkLinkedin" href="https://www.linkedin.com/company/etmam-center-ksa/" target="_blank" title="لينكد إن"><i class="fab fa-linkedin-in"></i></a>
+                        <a id="linkTelegram" href="https://t.me/etmam_ksa" target="_blank" title="تيليجرام"><i class="fab fa-telegram-plane"></i></a>
+                        <a id="linkInstagram" href="https://www.instagram.com/etmamksa" target="_blank" title="إنستقرام"><i class="fab fa-instagram"></i></a>
+                        <a id="linkWhatsapp" href="https://wa.me/966561089688" target="_blank" title="واتساب"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة لشركة إتمام | ETMAM © 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: DAILY ADVICE MODAL -->
+    <div id="adviceModal" class="modal-overlay">
+        <div class="modal-card" style="text-align: center; border-top: 6px solid var(--accent);">
+            <button class="modal-close" onclick="closeModal('adviceModal')">&times;</button>
+            <div style="font-size: 3rem; color: var(--accent); margin-bottom: 10px;">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 style="color: var(--primary-dark); font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">نصيحة اليوم المهنية 💡</h3>
+            <div style="background: #fffbeb; border: 1px solid #fef3c7; padding: 20px; border-radius: 12px; margin: 15px 0;">
+                <p id="adviceTextModal" style="font-size: 1.15rem; color: #78350f; font-weight: 700; line-height: 1.8;"></p>
+            </div>
+            <button onclick="closeModal('adviceModal')" class="btn-gold" style="width: 100%; margin-top: 10px;">أبشر، يعطيك العافية 👍</button>
+        </div>
+    </div>
+
+    <!-- MODAL 2: JOB DETAILS MODAL -->
+    <div id="jobDetailsModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal('jobDetailsModal')">&times;</button>
+            <div class="job-badge" id="modalJobBadge">دوام كامل</div>
+            <h3 id="modalJobTitle" style="color: var(--primary-dark); font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">عنوان الوظيفة</h3>
+            
+            <div class="job-meta" style="margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+                <span><i class="fas fa-building"></i> <strong id="modalJobCompany">الشركة</strong></span>
+                <span><i class="fas fa-map-marker-alt"></i> <strong id="modalJobLocation">المدينة</strong></span>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 8px;">تفاصيل ومتطلبات الوظيفة:</h4>
+                <p id="modalJobDesc" style="color: #475569; font-size: 0.98rem; white-space: pre-line; line-height: 1.8;"></p>
+            </div>
+
+            <a id="modalJobApplyBtn" href="#" target="_blank" class="btn-gold" style="display: block; text-align: center; text-decoration: none;">
+                <i class="fab fa-whatsapp"></i> التقديم الفوري عبر الواتساب
+            </a>
+        </div>
+    </div>
+
+    <!-- MODAL 3: ADMIN AUTHENTICATION -->
+    <div id="adminAuthModal" class="modal-overlay">
+        <div class="modal-card" style="max-width: 400px;">
+            <button class="modal-close" onclick="closeModal('adminAuthModal')">&times;</button>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <i class="fas fa-user-shield" style="font-size: 2.5rem; color: var(--primary);"></i>
+                <h3 style="color: var(--primary-dark); font-size: 1.3rem; margin-top: 10px;">دخول لوحة تحكم المدير</h3>
+            </div>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label>كلمة المرور:</label>
+                    <input type="password" id="adminPasswordInput" class="form-control" placeholder="أدخل كلمة المرور" required autocomplete="current-password">
+                </div>
+                <p id="authErrorMsg" style="color: #dc2626; font-size: 0.85rem; display: none; margin-bottom: 10px; font-weight: 700;">كلمة المرور غير صحيحة!</p>
+                <button type="submit" class="btn-gold" style="width: 100%;">دخول اللوحة</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: ADMIN DASHBOARD PANEL -->
+    <div id="adminDashboardModal" class="modal-overlay">
+        <div class="modal-card" style="max-width: 850px;">
+            <button class="modal-close" onclick="closeModal('adminDashboardModal')">&times;</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 20px;">
+                <h3 style="color: var(--primary); font-size: 1.4rem; font-weight: 800;"><i class="fas fa-cogs"></i> لوحة التحكم الكاملة بالمدير</h3>
+                <button onclick="closeModal('adminDashboardModal')" style="background: #fee2e2; color: #991b1b; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 700; cursor: pointer;">خروج</button>
+            </div>
+
+            <!-- SECTION 1: Contact Settings (WhatsApp, Email, Socials) -->
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+                <h4 style="color: var(--primary-dark); font-size: 1.1rem; margin-bottom: 15px;"><i class="fas fa-address-card"></i> إدارة بيانات التواصل (الواتساب والبريد):</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>رقم الواتساب (بدون + مثال: 966561089688):</label>
+                        <input type="text" id="adminPhoneInput" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني (Gmail):</label>
+                        <input type="email" id="adminEmailInput" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>رابط منصة إكس (X):</label>
+                        <input type="text" id="adminXInput" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>رابط حساب لينكد إن:</label>
+                        <input type="text" id="adminLinkedinInput" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>رابط قناة تيليجرام:</label>
+                        <input type="text" id="adminTelegramInput" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>رابط حساب إنستقرام:</label>
+                        <input type="text" id="adminInstagramInput" class="form-control">
+                    </div>
+                </div>
+                <button onclick="saveContactSettings()" class="btn-gold" style="padding: 8px 20px; font-size: 0.9rem;">حفظ وتحديث بيانات التواصل</button>
+            </div>
+
+            <!-- SECTION 2: Logo Management -->
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+                <h4 style="color: var(--primary-dark); font-size: 1.1rem; margin-bottom: 15px;"><i class="fas fa-image"></i> إدارة اللوجوهات الشعار:</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label>لوجو إتمام الرئيسي:</label>
+                        <input type="text" id="adminEtmamLogoInput" class="form-control" style="margin-bottom: 8px;">
+                        <input type="file" accept="image/*" class="form-control" onchange="handleFileUpload(this, 'adminEtmamLogoInput')">
+                    </div>
+                    <div class="form-group">
+                        <label>لوجو مراس:</label>
+                        <input type="text" id="adminMerasLogoInput" class="form-control" style="margin-bottom: 8px;">
+                        <input type="file" accept="image/*" class="form-control" onchange="handleFileUpload(this, 'adminMerasLogoInput')">
+                    </div>
+                </div>
+                <button onclick="saveNewLogos()" class="btn-gold" style="padding: 8px 20px; font-size: 0.9rem; margin-top: 5px;">حفظ وتحديث اللوجوهات</button>
+            </div>
+
+            <!-- SECTION 3: Testimonials Images -->
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+                <h4 style="color: var(--primary-dark); font-size: 1.1rem; margin-bottom: 15px;"><i class="fas fa-images"></i> إدارة صور تقييمات وتجارب العملاء:</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label>صورة 1 (تقييم ATS 100%):</label>
+                        <input type="text" id="adminTestimonial1" class="form-control" style="margin-bottom: 8px;">
+                        <input type="file" accept="image/*" class="form-control" onchange="handleFileUpload(this, 'adminTestimonial1')">
+                    </div>
+                    <div class="form-group">
+                        <label>صورة 2 (تقييم ATS بالإنجليزية):</label>
+                        <input type="text" id="adminTestimonial2" class="form-control" style="margin-bottom: 8px;">
+                        <input type="file" accept="image/*" class="form-control" onchange="handleFileUpload(this, 'adminTestimonial2')">
+                    </div>
+                    <div class="form-group">
+                        <label>صورة 3 (انطباعات الواتساب):</label>
+                        <input type="text" id="adminTestimonial3" class="form-control" style="margin-bottom: 8px;">
+                        <input type="file" accept="image/*" class="form-control" onchange="handleFileUpload(this, 'adminTestimonial3')">
+                    </div>
+                    <div class="form-group">
+                        <label>صورة 4 (محادثة الاستلام):</label>
+                        <input type="text" id="adminTestimonial4" class="form-control" style="margin-bottom: 8px;">
+                        <input type="file" accept="image/*" class="form-control" onchange="handleFileUpload(this, 'adminTestimonial4')">
+                    </div>
+                </div>
+                <button onclick="saveTestimonialImages()" class="btn-gold" style="padding: 8px 20px; font-size: 0.9rem; margin-top: 5px;">حفظ وتحديث صور التقييمات</button>
+            </div>
+
+            <!-- SECTION 4: Daily Advice -->
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+                <h4 style="color: var(--primary-dark); font-size: 1.1rem; margin-bottom: 10px;"><i class="fas fa-comment-dots"></i> تغيير النصيحة المهنية اليومية:</h4>
+                <div class="form-group">
+                    <textarea id="adminAdviceInput" class="form-control" placeholder="اكتب النصيحة المهنية هنا..."></textarea>
+                </div>
+                <button onclick="saveNewAdvice()" class="btn-gold" style="padding: 8px 20px; font-size: 0.9rem;">حفظ النصيحة الجديد</button>
+            </div>
+
+            <!-- SECTION 5: Add New Job -->
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+                <h4 style="color: var(--primary-dark); font-size: 1.1rem; margin-bottom: 15px;"><i class="fas fa-plus-circle"></i> إضافة وظيفة جديدة:</h4>
+                <form onsubmit="handleAddNewJob(event)">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>المسمى الوظيفي:</label>
+                            <input type="text" id="jobTitleInput" class="form-control" placeholder="مثال: أخصائي HR" required>
+                        </div>
+                        <div class="form-group">
+                            <label>جهة العمل:</label>
+                            <input type="text" id="jobCompanyInput" class="form-control" placeholder="مثال: شركة بالرياض" required>
+                        </div>
+                        <div class="form-group">
+                            <label>المدينة:</label>
+                            <input type="text" id="jobLocationInput" class="form-control" placeholder="مثال: الرياض" required>
+                        </div>
+                        <div class="form-group">
+                            <label>نوع الدوام:</label>
+                            <select id="jobTypeInput" class="form-control">
+                                <option value="دوام كامل">دوام كامل</option>
+                                <option value="دوام جزئي">دوام جزئي</option>
+                                <option value="عن بُعد">عن بُعد</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>التفاصيل والشروط:</label>
+                        <textarea id="jobDescInput" class="form-control" placeholder="اكتب الشروط والخبرة..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold" style="width: 100%;">نشر الوظيفة فوراً</button>
+                </form>
+            </div>
+
+            <!-- SECTION 6: Jobs List -->
+            <div>
+                <h4 style="color: var(--primary-dark); font-size: 1.1rem; margin-bottom: 10px;"><i class="fas fa-list"></i> إدارة الوظائف المنشورة:</h4>
+                <div id="adminJobsList" style="max-height: 250px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; background: white;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        // Defaults
+        const defaultAdvice = "يا بعد حيي، سيرة الـ ATS هي مفتاحك الأول للمقابلة الشخصية! رتّب الكلمات المفتاحية بالإنجليزية والعربي وضبط المهارات بالشكل الصح وتشوف الخوارزميات شلون تفتح لك الأبواب. توكل على الله!";
+        const defaultEtmamLogo = "logo.PNG";
+        const defaultMerasLogo = "cropped-merass-e1742765349271_4.png";
+        
+        const defaultContacts = {
+            phone: "966561089688",
+            email: "etmamjob1@gmail.com",
+            x: "https://x.com/Etmamjob",
+            linkedin: "https://www.linkedin.com/company/etmam-center-ksa/",
+            telegram: "https://t.me/etmam_ksa",
+            instagram: "https://www.instagram.com/etmamksa"
+        };
+
+        const defaultTestimonials = [
+            "https://placehold.co/400x320/4a0e17/ffffff?text=100%+ATS+Parse+Rate",
+            "https://placehold.co/400x320/4a0e17/ffffff?text=100%+ATS+Parse+Rate",
+            "https://placehold.co/400x320/2b3974/ffffff?text=WhatsApp+Feedback",
+            "https://placehold.co/400x320/2b3974/ffffff?text=WhatsApp+Feedback"
+        ];
+
+        const defaultJobs = [
+            {
+                id: 1,
+                title: "أخصائي موارد بشرية (HR Specialist)",
+                company: "مجموعة استثمارية كبرى",
+                location: "الرياض",
+                type: "دوام كامل",
+                desc: "مطلوب أخصائي HR خبرة لا تقل عن سنتين في قطاع الشركة بالمملكة.\n• معرفة تامة بنظام العمل السعودي ونظام قوى وممارسات التأمينات الاجتماعية.\n• إجادة متابعة الحضور والغياب وصياغة عقود العمل وتطوير الأداء.\n• إجادة استخدام الحاسب واللغة الإنجليزية."
+            },
+            {
+                id: 2,
+                title: "محاسب عام ومالي",
+                company: "شركة تجارية وخدمية",
+                location: "جدة",
+                type: "دوام كامل",
+                desc: "مطلوب محاسب عام للعمل بمقر الشركة الرئيسي بجدة.\n• إعداد القوائم المالية وإقرارات ضريبة القيمة المضافة VAT.\n• التعامل مع البرامج المحاسبية (ZOHO / Odoo).\n• بكالوريوس محاسبة مع إمكانية التسجيل بالهيئة السعودية SOCPA."
+            }
+        ];
+
+        // Init Data
+        function initData() {
+            if (!localStorage.getItem('etmam_advice')) localStorage.setItem('etmam_advice', defaultAdvice);
+            if (!localStorage.getItem('etmam_jobs')) localStorage.setItem('etmam_jobs', JSON.stringify(defaultJobs));
+            if (!localStorage.getItem('etmam_logo_url')) localStorage.setItem('etmam_logo_url', defaultEtmamLogo);
+            if (!localStorage.getItem('meras_logo_url')) localStorage.setItem('meras_logo_url', defaultMerasLogo);
+            if (!localStorage.getItem('etmam_testimonials')) localStorage.setItem('etmam_testimonials', JSON.stringify(defaultTestimonials));
+            if (!localStorage.getItem('etmam_contacts')) localStorage.setItem('etmam_contacts', JSON.stringify(defaultContacts));
+        }
+
+        function loadAllContent() {
+            const contacts = JSON.parse(localStorage.getItem('etmam_contacts')) || defaultContacts;
+            
+            // Apply Contacts
+            document.getElementById('footerPhoneDisplay').innerText = "+" + contacts.phone;
+            document.getElementById('footerEmailDisplay').innerText = contacts.email;
+            document.getElementById('linkX').href = contacts.x;
+            document.getElementById('linkLinkedin').href = contacts.linkedin;
+            document.getElementById('linkTelegram').href = contacts.telegram;
+            document.getElementById('linkInstagram').href = contacts.instagram;
+            document.getElementById('linkWhatsapp').href = `https://wa.me/${contacts.phone}`;
+            
+            // Dynamic Whatsapp Buttons
+            const waBtns = document.querySelectorAll('.wa-dynamic-btn');
+            waBtns.forEach(btn => {
+                const msg = encodeURIComponent(btn.getAttribute('data-msg') || 'استفسار عن خدمات إتمام');
+                btn.href = `https://wa.me/${contacts.phone}?text=${msg}`;
+            });
+
+            document.getElementById('heroWhatsappBtn').href = `https://wa.me/${contacts.phone}?text=${encodeURIComponent('يا هلا، أبشر بخدمتكم وأستفسر عن خدمات إتمام')}`;
+
+            // Apply Logos
+            document.getElementById('headerEtmamLogo').src = localStorage.getItem('etmam_logo_url') || defaultEtmamLogo;
+            document.getElementById('merasLogoImg').src = localStorage.getItem('meras_logo_url') || defaultMerasLogo;
+
+            // Apply Testimonials
+            const testimonials = JSON.parse(localStorage.getItem('etmam_testimonials')) || defaultTestimonials;
+            if (testimonials[0]) document.getElementById('testiImg1').src = testimonials[0];
+            if (testimonials[1]) document.getElementById('testiImg2').src = testimonials[1];
+            if (testimonials[2]) document.getElementById('testiImg3').src = testimonials[2];
+            if (testimonials[3]) document.getElementById('testiImg4').src = testimonials[3];
+        }
+
+        function handleFileUpload(inputElement, targetInputId) {
+            const file = inputElement.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(targetInputId).value = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function renderJobs() {
+            const jobs = JSON.parse(localStorage.getItem('etmam_jobs')) || [];
+            const container = document.getElementById('jobsGrid');
+            const adminContainer = document.getElementById('adminJobsList');
+            
+            container.innerHTML = '';
+            adminContainer.innerHTML = '';
+
+            if (jobs.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 30px;">لا توجد وظائف معروضة حالياً.</p>';
+            }
+
+            jobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.onclick = () => openJobDetails(job.id);
+                card.innerHTML = `
+                    <div>
+                        <span class="job-badge">${job.type}</span>
+                        <h3>${job.title}</h3>
+                        <div class="job-meta">
+                            <span><i class="fas fa-building"></i> ${job.company}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
+                        </div>
+                        <p class="job-desc-snippet">${job.desc}</p>
+                    </div>
+                    <button class="btn-job-details">تفاصيل الوظيفة والتقديم <i class="fas fa-arrow-left"></i></button>
+                `;
+                container.appendChild(card);
+
+                const adminItem = document.createElement('div');
+                adminItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #f1f5f9;';
+                adminItem.innerHTML = `
+                    <div>
+                        <strong style="color: var(--primary);">${job.title}</strong>
+                        <span style="font-size: 0.8rem; color: #64748b; display: block;">${job.company} - ${job.location}</span>
+                    </div>
+                    <button onclick="deleteJob(${job.id})" style="background: #fee2e2; color: #dc2626; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;"><i class="fas fa-trash"></i> حذف</button>
+                `;
+                adminContainer.appendChild(adminItem);
+            });
+        }
+
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        function openJobDetails(jobId) {
+            const jobs = JSON.parse(localStorage.getItem('etmam_jobs')) || [];
+            const job = jobs.find(j => j.id === jobId);
+            if (!job) return;
+
+            const contacts = JSON.parse(localStorage.getItem('etmam_contacts')) || defaultContacts;
+
+            document.getElementById('modalJobBadge').innerText = job.type;
+            document.getElementById('modalJobTitle').innerText = job.title;
+            document.getElementById('modalJobCompany').innerText = job.company;
+            document.getElementById('modalJobLocation').innerText = job.location;
+            document.getElementById('modalJobDesc').innerText = job.desc;
+
+            const waMsg = encodeURIComponent(`يا هلا إتمام، أبغى أقدم على وظيفة: (${job.title}) - ${job.company}`);
+            document.getElementById('modalJobApplyBtn').href = `https://wa.me/${contacts.phone}?text=${waMsg}`;
+
+            openModal('jobDetailsModal');
+        }
+
+        function openAdminAuthModal() {
+            document.getElementById('adminPasswordInput').value = '';
+            document.getElementById('authErrorMsg').style.display = 'none';
+            openModal('adminAuthModal');
+        }
+
+        // Direct Login Handler
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputPass = document.getElementById('adminPasswordInput').value.trim();
+            
+            // Valid Password Check: 1234567Mm
+            if (inputPass === '1234567Mm') {
+                closeModal('adminAuthModal');
+                
+                // Populate Dashboard Inputs
+                const contacts = JSON.parse(localStorage.getItem('etmam_contacts')) || defaultContacts;
+                document.getElementById('adminPhoneInput').value = contacts.phone || '';
+                document.getElementById('adminEmailInput').value = contacts.email || '';
+                document.getElementById('adminXInput').value = contacts.x || '';
+                document.getElementById('adminLinkedinInput').value = contacts.linkedin || '';
+                document.getElementById('adminTelegramInput').value = contacts.telegram || '';
+                document.getElementById('adminInstagramInput').value = contacts.instagram || '';
+
+                document.getElementById('adminAdviceInput').value = localStorage.getItem('etmam_advice') || '';
+                document.getElementById('adminEtmamLogoInput').value = localStorage.getItem('etmam_logo_url') || defaultEtmamLogo;
+                document.getElementById('adminMerasLogoInput').value = localStorage.getItem('meras_logo_url') || defaultMerasLogo;
+
+                const testimonials = JSON.parse(localStorage.getItem('etmam_testimonials')) || defaultTestimonials;
+                document.getElementById('adminTestimonial1').value = testimonials[0] || '';
+                document.getElementById('adminTestimonial2').value = testimonials[1] || '';
+                document.getElementById('adminTestimonial3').value = testimonials[2] || '';
+                document.getElementById('adminTestimonial4').value = testimonials[3] || '';
+
+                openModal('adminDashboardModal');
+            } else {
+                document.getElementById('authErrorMsg').style.display = 'block';
+            }
+        });
+
+        // Save Contact Settings
+        function saveContactSettings() {
+            const contacts = {
+                phone: document.getElementById('adminPhoneInput').value.trim(),
+                email: document.getElementById('adminEmailInput').value.trim(),
+                x: document.getElementById('adminXInput').value.trim(),
+                linkedin: document.getElementById('adminLinkedinInput').value.trim(),
+                telegram: document.getElementById('adminTelegramInput').value.trim(),
+                instagram: document.getElementById('adminInstagramInput').value.trim()
+            };
+            localStorage.setItem('etmam_contacts', JSON.stringify(contacts));
+            loadAllContent();
+            alert('تم حفظ وتحديث بيانات التواصل بنجاح 👍');
+        }
+
+        function saveNewLogos() {
+            localStorage.setItem('etmam_logo_url', document.getElementById('adminEtmamLogoInput').value.trim());
+            localStorage.setItem('meras_logo_url', document.getElementById('adminMerasLogoInput').value.trim());
+            loadAllContent();
+            alert('تم حفظ اللوجوهات بنجاح 👍');
+        }
+
+        function saveTestimonialImages() {
+            const testimonials = [
+                document.getElementById('adminTestimonial1').value.trim(),
+                document.getElementById('adminTestimonial2').value.trim(),
+                document.getElementById('adminTestimonial3').value.trim(),
+                document.getElementById('adminTestimonial4').value.trim()
+            ];
+            localStorage.setItem('etmam_testimonials', JSON.stringify(testimonials));
+            loadAllContent();
+            alert('تم حفظ صور التقييمات بنجاح ⭐');
+        }
+
+        function saveNewAdvice() {
+            const val = document.getElementById('adminAdviceInput').value.trim();
+            if (val) {
+                localStorage.setItem('etmam_advice', val);
+                document.getElementById('adviceTextModal').innerText = val;
+                alert('تم حفظ النصيحة بنجاح 👍');
+            }
+        }
+
+        function handleAddNewJob(e) {
+            e.preventDefault();
+            const jobs = JSON.parse(localStorage.getItem('etmam_jobs')) || [];
+            jobs.unshift({
+                id: Date.now(),
+                title: document.getElementById('jobTitleInput').value.trim(),
+                company: document.getElementById('jobCompanyInput').value.trim(),
+                location: document.getElementById('jobLocationInput').value.trim(),
+                type: document.getElementById('jobTypeInput').value,
+                desc: document.getElementById('jobDescInput').value.trim()
+            });
+            localStorage.setItem('etmam_jobs', JSON.stringify(jobs));
+            renderJobs();
+            alert('تم نشر الوظيفة بنجاح 🎉');
+        }
+
+        function deleteJob(jobId) {
+            if (confirm('هل أنت تأكد من حذف هذه الوظيفة؟')) {
+                let jobs = JSON.parse(localStorage.getItem('etmam_jobs')) || [];
+                jobs = jobs.filter(j => j.id !== jobId);
+                localStorage.setItem('etmam_jobs', JSON.stringify(jobs));
+                renderJobs();
+            }
+        }
+
+        window.onload = function() {
+            initData();
+            loadAllContent();
+            renderJobs();
+
+            document.getElementById('adviceTextModal').innerText = localStorage.getItem('etmam_advice');
+            setTimeout(() => { openModal('adviceModal'); }, 600);
+        };
+    </script>
+</body>
+</html>
