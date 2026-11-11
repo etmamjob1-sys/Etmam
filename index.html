@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام | للخدمات الإلكترونية والتوظيف والتطوير المهني</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #240609;
+            color: #f3f4f6;
+        }
+        .burgundy-bg {
+            background-color: #2c0a0e;
+        }
+        .burgundy-dark {
+            background-color: #1a0407;
+        }
+        .burgundy-card {
+            background-color: #380d12;
+            border: 1px solid rgba(217, 119, 6, 0.25);
+        }
+        .gold-text {
+            color: #e5b86b;
+        }
+        .gold-border {
+            border-color: #d97706;
+        }
+        .gold-gradient-btn {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+        }
+        .gold-gradient-btn:hover {
+            background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+        }
+        .hero-luxury {
+            background: linear-gradient(135deg, #240609 0%, #120204 100%);
+            border-bottom: 2px solid rgba(217, 119, 6, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-amber-600 selection:text-white">
+
+    <!-- Top Bar / Contact & Social Header -->
+    <div class="burgundy-dark text-amber-200/80 text-xs py-2 px-4 border-b border-amber-900/40">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span id="top-phone"><i class="fa-solid fa-phone text-amber-400 ml-1"></i> +966561089688</span>
+                <span><i class="fa-solid fa-location-dot text-amber-400 ml-1"></i> المملكة العربية السعودية</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <a id="top-x-link" href="https://x.com/Etmamjob" target="_blank" class="hover:text-amber-400 transition"><i class="fa-brands fa-x-twitter text-sm"></i> تويتر / إكس</a>
+                <a id="top-linkedin-link" href="#" target="_blank" class="hover:text-amber-400 transition"><i class="fa-brands fa-linkedin text-sm"></i> لينكد إن</a>
+                <button onclick="openAdminModal()" class="bg-amber-700 hover:bg-amber-600 text-slate-950 px-3 py-1 rounded-md font-black transition flex items-center gap-1 shadow">
+                    <i class="fa-solid fa-lock text-xs"></i> غرفة المدير
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="burgundy-bg shadow-xl sticky top-0 z-40 border-b border-amber-900/50 backdrop-blur-md bg-opacity-95">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- Logo -->
+                <div class="w-12 h-12 rounded-xl overflow-hidden shadow-md border border-amber-600/40 flex items-center justify-center bg-black/40">
+                    <img id="nav-logo-img" src="logo_2.PNG" alt="شعار إتمام" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/240609/e5b86b?text=ETMAM'">
+                </div>
+                <div>
+                    <h1 class="text-xl font-black text-amber-400 tracking-tight">إتمام</h1>
+                    <p class="text-[10px] text-amber-200/70">للخدمات الإلكترونية والتوظيف الفاخرة</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 font-semibold text-sm text-slate-200">
+                <a href="#home" class="hover:text-amber-400 transition">الرئيسية</a>
+                <a href="#advice" class="hover:text-amber-400 transition">النصيحة اليومية</a>
+                <a href="#jobs" class="hover:text-amber-400 transition">الوظائف</a>
+                <a href="#services" class="hover:text-amber-400 transition">خدمات السيرة واللينكد إن</a>
+                <a href="#merass" class="hover:text-amber-400 transition text-emerald-300 font-bold">برامج مراس (ماجستير ودورات)</a>
+                <a href="#testimonials" class="hover:text-amber-400 transition">آراء العملاء</a>
+            </nav>
+            <div>
+                <a href="https://wa.me/966561089688" target="_blank" class="gold-gradient-btn text-slate-950 px-4 py-2 rounded-xl text-sm font-black shadow-lg transition flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> تواصل معنا
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Daily Community Advice Banner -->
+    <section id="advice" class="bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 text-white py-4 px-4 shadow-inner border-b border-amber-700/50">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-400 text-slate-950 p-3 rounded-xl shadow font-black text-xl">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-amber-300 font-bold">إضاءة المجتمع الوظيفي اليومية</span>
+                    <p id="daily-advice-text" class="text-base sm:text-lg font-medium text-amber-100 mt-0.5">
+                        استثمر في تطوير سيرتك الذاتية واجعلها تبرز إنجازاتك بالأرقام، فهذا يضاعف فرص قبولك لدى كبرى الشركات السعودية.
+                    </p>
+                </div>
+            </div>
+            <span class="text-xs bg-black/40 text-amber-300 px-3 py-1.5 rounded-full border border-amber-600/40 shrink-0">
+                محدث يومياً بواسطة الإدارة
+            </span>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-luxury text-white py-16 px-4 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6 text-center md:text-right">
+                <div class="inline-flex items-center gap-2 bg-amber-900/60 border border-amber-600/40 px-3 py-1 rounded-full text-amber-300 text-xs font-semibold">
+                    <i class="fa-solid fa-circle-check"></i> بوابتك الأولى للتميز المهني في السعودية
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-black leading-tight tracking-tight">
+                    حقق طموحك الوظيفي مع <span class="text-amber-400">إتمام</span> الفاخرة
+                </h1>
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                    نقدم خدمات متكاملة لنشر الوظائف، والتقديم الاحترافي نيابة عنك، وتعديل السيرة الذاتية، وتحسين حسابات لينكد إن، إلى جانب برامج الماجستير المهنية والدورات المعتمدة بالشراكة مع مراس للتدريب.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+                    <a href="#jobs" class="gold-gradient-btn text-slate-950 px-6 py-3.5 rounded-xl font-bold shadow-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase"></i> تصفح الوظائف
+                    </a>
+                    <a href="#merass" class="bg-emerald-900/40 hover:bg-emerald-900/60 border border-emerald-500/40 text-emerald-300 px-6 py-3.5 rounded-xl font-bold transition flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap"></i> برامج مراس للماجستير
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-500/40 bg-black/50">
+                    <img id="hero-banner-img" src="logo_2.PNG" alt="إتمام للخدمات" class="w-full h-full object-cover opacity-95" onerror="this.src='https://placehold.co/400x400/240609/e5b86b?text=ETMAM'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section id="jobs" class="py-16 px-4 max-w-7xl mx-auto w-full">
+        <div class="text-center mb-12">
+            <span class="text-amber-400 font-bold text-sm tracking-wider uppercase bg-amber-950/60 px-3 py-1 rounded-full border border-amber-600/30">الفرص الوظيفية</span>
+            <h2 class="text-3xl font-black text-white mt-2">الوظائف المتاحة حالياً في المملكة</h2>
+            <p class="text-slate-400 text-sm mt-1">تُحدث هذه القائمة يومياً من قِبل إدارة إتمام</p>
+        </div>
+
+        <div id="jobs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic Jobs will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Services Section: CV, LinkedIn, Interview Consultation -->
+    <section id="services" class="burgundy-dark py-16 px-4 border-y border-amber-900/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-amber-400 font-bold text-sm tracking-wider uppercase bg-amber-950/60 px-3 py-1 rounded-full border border-amber-600/30">خدماتنا الاحترافية</span>
+                <h2 class="text-3xl font-black text-white mt-2">طور مسيرتك المهنية واضمن قبولك</h2>
+                <p class="text-slate-400 text-sm mt-1">نضع بين يديك خبرة متكاملة لمنافسة أقوى المرشحين</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="burgundy-card p-8 rounded-2xl shadow-xl hover:border-amber-400 transition text-center group">
+                    <div class="w-16 h-16 bg-amber-950 text-amber-400 border border-amber-600/40 rounded-2xl mx-auto flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-amber-600 group-hover:text-slate-950 transition">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">تعديل السيرة الذاتية (CV)</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        إعادة صياغة وتصميم سيرتك الذاتية وفق معايير نظام الأتسو (ATS) الحديثة لتلفت انتباه مسؤولي التوظيف في كبرى الشركات السعودية.
+                    </p>
+                    <a href="https://wa.me/966561089688?text=السلام عليكم، أرغب في الاستفسار عن خدمة تعديل السيرة الذاتية" target="_blank" class="inline-block gold-gradient-btn text-slate-950 px-5 py-2.5 rounded-xl font-black text-sm transition shadow">
+                        اطلب الخدمة الآن
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="burgundy-card p-8 rounded-2xl shadow-xl hover:border-amber-400 transition text-center group">
+                    <div class="w-16 h-16 bg-amber-950 text-amber-400 border border-amber-600/40 rounded-2xl mx-auto flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-amber-600 group-hover:text-slate-950 transition">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">تحسين حساب لينكد إن (LinkedIn)</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        تحسين الملف الشخصي، كتابة نبذة احترافية، إضافة الكلمات الدلالية، وجعل حسابك يظهر في نتائج بحث مسؤولي استقطاب المواهب.
+                    </p>
+                    <a href="https://wa.me/966561089688?text=السلام عليكم، أرغب في الاستفسار عن خدمة تحسين حساب لينكد إن" target="_blank" class="inline-block gold-gradient-btn text-slate-950 px-5 py-2.5 rounded-xl font-black text-sm transition shadow">
+                        اطلب الخدمة الآن
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="burgundy-card p-8 rounded-2xl shadow-xl hover:border-amber-400 transition text-center group">
+                    <div class="w-16 h-16 bg-amber-950 text-amber-400 border border-amber-600/40 rounded-2xl mx-auto flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-amber-600 group-hover:text-slate-950 transition">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">استشارات المقابلات الشخصية</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        جلسة استشارية وتدريبية محاكاة للمقابلات الشخصية (عن بعد) مع نصائح دقيقة لتعزيز ثقتك والإجابة على الأسئلة الصعبة باحترافية.
+                    </p>
+                    <a href="https://wa.me/966561089688?text=السلام عليكم، أرغب في حجز جلسة استشارات للمقابلات الشخصية" target="_blank" class="inline-block gold-gradient-btn text-slate-950 px-5 py-2.5 rounded-xl font-black text-sm transition shadow">
+                        اطلب الخدمة الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Merass Section (Master & Professional Certifications) Styled with Merass Brand Colors -->
+    <section id="merass" class="py-16 px-4 max-w-7xl mx-auto w-full">
+        <div class="bg-gradient-to-br from-[#0b261c] via-[#164e35] to-[#061811] text-white rounded-3xl p-8 sm:p-12 shadow-2xl border-2 border-emerald-500/50 relative overflow-hidden">
+            <div class="absolute -left-10 -bottom-10 opacity-5 text-9xl pointer-events-none text-emerald-300">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-6 mb-12 border-b border-emerald-800/80 pb-8">
+                <div class="w-24 h-24 bg-white rounded-2xl p-2 shadow-xl flex items-center justify-center shrink-0 border-2 border-emerald-400">
+                    <img id="merass-logo-img" src="cropped-merass-e1742765349271.png" alt="مراس للتدريب والتطور المهني" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/100x100/164e35/e5b86b?text=MERASS'">
+                </div>
+                <div>
+                    <span class="text-emerald-300 font-bold text-xs uppercase tracking-widest bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/40">شراكة تعليمية معتمدة بمراس</span>
+                    <h2 class="text-3xl sm:text-4xl font-black mt-2 text-white">برامج مراس للتدريب والتطوير المهني</h2>
+                    <p class="text-emerald-100/80 text-sm mt-1">ارتقِ بمستقبلك الوظيفي من خلال برامج الماجستير المهنية وبرامج التأهيل للشهادات الاحترافية المعتمدة.</p>
+                </div>
+            </div>
+
+            <!-- Grid for Master and Certifications -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Master Programs -->
+                <div class="bg-[#103828]/95 border border-emerald-500/40 p-6 sm:p-8 rounded-2xl backdrop-blur-sm shadow-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-emerald-500 text-slate-950 p-3 rounded-xl font-bold shadow">
+                            <i class="fa-solid fa-award text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-black text-white">برامج الماجستير المهنية المعتمدة</h3>
+                            <p class="text-xs text-emerald-200/80">تخصصات متقدمة لإدارة الأعمال والقيادة</p>
+                        </div>
+                    </div>
+                    <ul id="mba-programs-list" class="space-y-3 text-sm text-emerald-50">
+                        <!-- Loaded dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Professional Certifications -->
+                <div class="bg-[#103828]/95 border border-emerald-500/40 p-6 sm:p-8 rounded-2xl backdrop-blur-sm shadow-xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-emerald-500 text-slate-950 p-3 rounded-xl font-bold shadow">
+                            <i class="fa-solid fa-certificate text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-black text-white">تأهيل لشهادات إحترافية</h3>
+                            <p class="text-xs text-emerald-200/80">شهادات تدعم مسارك المهني والمالي والإداري</p>
+                        </div>
+                    </div>
+                    <ul id="cert-programs-list" class="space-y-3 text-sm text-emerald-50">
+                        <!-- Loaded dynamically -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="https://wa.me/966561089688?text=السلام عليكم، أرغب في التسجيل والاستفسار عن برامج مراس للماجستير والدورات الاحترافية" target="_blank" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black px-8 py-3.5 rounded-xl shadow-lg transition inline-flex items-center gap-2 text-base">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> للتسجيل والاستفسار عن برامج مراس
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials & CV Evaluation Rating Image Section -->
+    <section id="testimonials" class="burgundy-dark py-16 px-4 border-t border-amber-900/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-amber-400 font-bold text-sm tracking-wider uppercase bg-amber-950/60 px-3 py-1 rounded-full border border-amber-600/30">آراء العملاء</span>
+                <h2 class="text-3xl font-black text-white mt-2">ماذا قالو عنا؟ ونماذج من تقييمات السير الذاتية</h2>
+                <p class="text-slate-400 text-sm mt-1">نفخر بثقة عملائنا في الخدمات الوظيفية وتقييمات السير الذاتية</p>
+            </div>
+
+            <!-- Rating Image Showcase -->
+            <div class="mb-12 burgundy-card rounded-3xl p-6 sm:p-8 shadow-xl text-center">
+                <h3 class="text-lg font-bold text-amber-300 mb-4">نموذج تقييم السير الذاتية والنتائج الفورية</h3>
+                <div class="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-amber-600/50 bg-black/50">
+                    <img id="eval-img" src="https://placehold.co/800x450/240609/e5b86b?text=CV+Evaluation+Report" alt="تقييم السير الذاتية" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x450/240609/e5b86b?text=CV+Evaluation+Report'">
+                </div>
+                <p class="text-xs text-amber-300/70 mt-3">* يتم تحديث هذا النموذج والصورة مباشرة من غرفة المدير.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="burgundy-card p-6 rounded-2xl relative shadow-lg">
+                    <div class="text-amber-400 mb-3 text-sm flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-200 text-sm leading-relaxed mb-4">
+                        "خدمة تعديل السيرة الذاتية ممتازة جداً ونظام الأتسو جعلني أتلقى عروض مقابلات خلال أسبوع واحد فقط. شكراً فريق إتمام!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-600 text-slate-950 font-black flex items-center justify-center text-sm">م</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">محمد القحطاني</h4>
+                            <span class="text-xs text-amber-300/70">إداري مشاريع - الرياض</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="burgundy-card p-6 rounded-2xl relative shadow-lg">
+                    <div class="text-amber-400 mb-3 text-sm flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-200 text-sm leading-relaxed mb-4">
+                        "استشرت الفريق في حساب لينكد إن وأجروا لي مقابلة تجريبية، كانت النتائج مبهرة وحصلت على وظيفة الأحلام في الدمام."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-600 text-slate-950 font-black flex items-center justify-center text-sm">س</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">سارة الشمري</h4>
+                            <span class="text-xs text-amber-300/70">أخصائية موارد بشرية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="burgundy-card p-6 rounded-2xl relative shadow-lg">
+                    <div class="text-amber-400 mb-3 text-sm flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-200 text-sm leading-relaxed mb-4">
+                        "سجلت في برنامج الماجستير المهني عبر مراس عبر موقع إتمام، الدعم كان متواصل والشهادة معتمدة وقوية جداً."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-600 text-slate-950 font-black flex items-center justify-center text-sm">خ</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">خالد الدوسري</h4>
+                            <span class="text-xs text-amber-300/70">مدير تسويق - جدة</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-slate-400 py-12 px-4 mt-auto border-t border-amber-900/40">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg overflow-hidden bg-amber-950 border border-amber-600/40">
+                        <img id="footer-logo-img" src="logo_2.PNG" alt="إتمام" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-white font-black text-lg">إتمام | ETMAM</span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    منصة سعودية رائدة تقدم الخدمات الإلكترونية ونشر الوظائف وتطوير السير الذاتية واستشارات المقابلات بالتعاون مع مراس للتدريب والتطوير المهني.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4">روابط سريعة</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#home" class="hover:text-amber-400 transition">الرئيسية</a></li>
+                    <li><a href="#advice" class="hover:text-amber-400 transition">النصيحة اليومية</a></li>
+                    <li><a href="#jobs" class="hover:text-amber-400 transition">الوظائف المتاحة</a></li>
+                    <li><a href="#services" class="hover:text-amber-400 transition">الخدمات المهنية</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4">برامج مراس التعليمية</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#merass" class="hover:text-amber-400 transition">الماجستير المهني المعتمد</a></li>
+                    <li><a href="#merass" class="hover:text-amber-400 transition">التأهيل للشهادات الاحترافية</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4">تواصل معنا</h4>
+                <ul class="space-y-2 text-xs">
+                    <li id="footer-phone"><i class="fa-solid fa-phone text-amber-400 ml-1"></i> +966561089688</li>
+                    <li><a id="footer-x-link" href="https://x.com/Etmamjob" target="_blank" class="hover:text-amber-400 transition"><i class="fa-brands fa-x-twitter text-amber-400 ml-1"></i> إكس / تويتر</a></li>
+                    <li><a id="footer-linkedin-link" href="#" target="_blank" class="hover:text-amber-400 transition"><i class="fa-brands fa-linkedin text-amber-400 ml-1"></i> لينكد إن</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-amber-900/40 pt-6 text-center text-xs text-slate-500">
+            جميع الحقوق محفوظة © 2026 شركة إتمام للخدمات الإلكترونية والوظائف.
+        </div>
+    </footer>
+
+    <!-- Admin Modal (Password Protected Manager Room) -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="burgundy-bg border border-amber-600/50 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto text-white">
+            <button onclick="closeAdminModal()" class="absolute left-6 top-6 text-slate-400 hover:text-white text-xl font-bold">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Password Screen -->
+            <div id="admin-auth-screen">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-amber-950 text-amber-400 border border-amber-600/40 rounded-full mx-auto flex items-center justify-center text-2xl mb-3">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white">غرفة المدير الخاصة</h3>
+                    <p class="text-amber-200/70 text-xs mt-1">أدخل كلمة المرور الخاصة بالمدير للوصول إلى لوحة التحكم والتحديثات الفورية</p>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-amber-300 mb-1">كلمة المرور</label>
+                        <input type="password" id="admin-pass-input" placeholder="أدخل كلمة المرور الخاصة بك" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-amber-600/40 text-white focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm">
+                    </div>
+                    <button onclick="checkAdminPassword()" class="w-full gold-gradient-btn text-slate-950 font-black py-3 rounded-xl transition shadow">
+                        دخول غرفة المدير
+                    </button>
+                    <p id="pass-error" class="text-red-400 text-xs text-center hidden">كلمة المرور غير صحيحة! يرجى المحاولة مرة أخرى.</p>
+                </div>
+            </div>
+
+            <!-- Admin Panel Dashboard (Hidden initially) -->
+            <div id="admin-dashboard-screen" class="hidden space-y-6">
+                <div class="flex justify-between items-center border-b border-amber-900/60 pb-4">
+                    <div>
+                        <h3 class="text-xl font-black text-amber-400">لوحة تحكم المدير العام</h3>
+                        <p class="text-xs text-amber-200/70">التغييرات ستظهر مباشرة على الموقع لجميع الزوار فوراً</p>
+                    </div>
+                    <button onclick="logoutAdmin()" class="bg-red-900/60 text-red-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-red-800 transition border border-red-700/50">
+                        تسجيل خروج
+                    </button>
+                </div>
+
+                <!-- Tabs Navigation inside Admin -->
+                <div class="flex gap-2 border-b border-amber-900/60 pb-2 overflow-x-auto text-xs">
+                    <button onclick="switchAdminTab('tab-advice')" id="btn-tab-advice" class="admin-tab-btn gold-gradient-btn text-slate-950 px-3 py-2 rounded-lg font-bold shrink-0">النصيحة اليومية</button>
+                    <button onclick="switchAdminTab('tab-jobs')" id="btn-tab-jobs" class="admin-tab-btn bg-black/40 text-slate-300 px-3 py-2 rounded-lg font-bold shrink-0 border border-amber-900/40">إدارة الوظائف</button>
+                    <button onclick="switchAdminTab('tab-settings')" id="btn-tab-settings" class="admin-tab-btn bg-black/40 text-slate-300 px-3 py-2 rounded-lg font-bold shrink-0 border border-amber-900/40">معلومات الاتصال والروابط</button>
+                    <button onclick="switchAdminTab('tab-images')" id="btn-tab-images" class="admin-tab-btn bg-black/40 text-slate-300 px-3 py-2 rounded-lg font-bold shrink-0 border border-amber-900/40">الصور والشعارات</button>
+                </div>
+
+                <!-- Tab 1: Daily Advice -->
+                <div id="tab-advice" class="admin-tab-content space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-amber-300 mb-1">نصيحة المجتمع الوظيفي اليومية</label>
+                        <textarea id="admin-advice-input" rows="3" class="w-full px-3 py-2 rounded-xl bg-black/40 border border-amber-600/40 text-xs text-white focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+                    </div>
+                    <button onclick="saveDailyAdvice()" class="gold-gradient-btn text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition">
+                        حفظ ونشر النصيحة
+                    </button>
+                </div>
+
+                <!-- Tab 2: Manage Jobs -->
+                <div id="tab-jobs" class="admin-tab-content space-y-4 hidden">
+                    <h4 class="font-bold text-sm text-amber-300">إضافة وظيفة جديدة</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <input type="text" id="new-job-title" placeholder="المسمى الوظيفي (مثال: محاسب عام)" class="px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white">
+                        <input type="text" id="new-job-company" placeholder="الشركة (مثال: شركة أرامكو / سابك)" class="px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white">
+                        <input type="text" id="new-job-location" placeholder="المدينة (مثال: الرياض، جدة)" class="px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white">
+                        <input type="text" id="new-job-tag" placeholder="التصنيف (مثال: دوام كامل / عن بعد)" class="px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white">
+                    </div>
+                    <textarea id="new-job-desc" placeholder="تفاصيل الوظيفة والشروط..." rows="2" class="w-full px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-xs text-white"></textarea>
+                    <button onclick="addNewJob()" class="gold-gradient-btn text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition">
+                        إضافة الوظيفة للموقع
+                    </button>
+
+                    <div class="mt-6">
+                        <h4 class="font-bold text-sm text-amber-300 mb-2">الوظائف الحالية (حذف أو تعديل)</h4>
+                        <div id="admin-jobs-list" class="space-y-2 max-h-48 overflow-y-auto text-xs">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Contact & Links -->
+                <div id="tab-settings" class="admin-tab-content space-y-4 hidden text-xs">
+                    <div>
+                        <label class="block font-bold text-amber-300 mb-1">رقم الهاتف / الواتساب</label>
+                        <input type="text" id="admin-phone-input" class="w-full px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-amber-300 mb-1">رابط تويتر / إكس (X)</label>
+                        <input type="text" id="admin-x-input" class="w-full px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-amber-300 mb-1">رابط لينكد إن (LinkedIn)</label>
+                        <input type="text" id="admin-linkedin-input" class="w-full px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white">
+                    </div>
+                    <button onclick="saveContactSettings()" class="gold-gradient-btn text-slate-950 font-bold px-4 py-2 rounded-xl transition">
+                        حفظ معلومات الاتصال
+                    </button>
+                </div>
+
+                <!-- Tab 4: Images & Logos -->
+                <div id="tab-images" class="admin-tab-content space-y-4 text-xs hidden">
+                    <div>
+                        <label class="block font-bold text-amber-300 mb-1">رابط أو مسار شعار إتمام (Logo)</label>
+                        <input type="text" id="admin-logo-url" class="w-full px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white" placeholder="logo_2.PNG">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-amber-300 mb-1">رابط أو مسار شعار مراس (Merass Logo)</label>
+                        <input type="text" id="admin-merass-logo-url" class="w-full px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white" placeholder="cropped-merass-e1742765349271.png">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-amber-300 mb-1">رابط صورة تقييم السير الذاتية (Review / Evaluation Image)</label>
+                        <input type="text" id="admin-eval-img-url" class="w-full px-3 py-2 rounded-lg bg-black/40 border border-amber-600/40 text-white" placeholder="https://...">
+                    </div>
+                    <button onclick="saveImagesSettings()" class="gold-gradient-btn text-slate-950 font-bold px-4 py-2 rounded-xl transition">
+                        حفظ وتحديث الصور والشعارات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Custom Toast -->
+    <div id="toast-notification" class="fixed bottom-6 left-6 bg-black text-amber-300 px-4 py-3 rounded-2xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 text-xs flex items-center gap-2 border border-amber-600/50">
+        <i class="fa-solid fa-circle-check text-amber-400"></i>
+        <span id="toast-msg">تم الحفظ بنجاح!</span>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initial Default Data with Brand Identity
+        const defaultData = {
+            advice: "استثمر في تطوير سيرتك الذاتية واجعلها تبرز إنجازاتك بالأرقام، فهذا يضاعف فرص قبولك لدى كبرى الشركات السعودية.",
+            phone: "+966561089688",
+            xLink: "https://x.com/Etmamjob",
+            linkedinLink: "https://linkedin.com",
+            logoUrl: "logo_2.PNG",
+            merassLogoUrl: "cropped-merass-e1742765349271.png",
+            evalImgUrl: "https://placehold.co/800x450/240609/e5b86b?text=CV+Evaluation+Report+Sample",
+            jobs: [
+                { id: 1, title: "مساعد مدير مشاريع (CAPM)", company: "شركة المقاولات الحديثة", location: "الرياض", tag: "دوام كامل", desc: "مطلوب مساعد مدير مشاريع مؤهل لإدارة ومتابعة الجداول الزمنية." },
+                { id: 2, title: "محاسب مالي و زمالة SOCPA", company: "مجموعة الاستشارات المالية", location: "جدة", tag: "دوام كامل", desc: "خبرة لا تقل عن سنتين وإجادة إعداد القوائم المالية والمعايير السعودية." },
+                { id: 3, title: "أخصائي موارد بشرية (HR)", company: "شركة التوظيف المتقدم", location: "الدمام", tag: "عن بعد / هجين", desc: "إدارة عمليات التوظيف ومتابعة شؤون الموظفين وأنظمة العمل السعودية." }
+            ],
+            mbaPrograms: [
+                "إدارة الأعمال المتقدمة – MBA",
+                "إدارة الموارد البشرية",
+                "الحوكمة وإدارة المخاطر والامتثال GRC",
+                "إدارة المشاريع",
+                "الصحة النفسية",
+                "التخطيط الاستراتيجي وإدارة الجودة",
+                "العلاقات العامة والتسويق",
+                "إدارة التقنية والتحول الرقمي",
+                "التسويق والمبيعات",
+                "السلامة والصحة المهنية",
+                "المحاسبة والإدارة المالية",
+                "علم النفس التربوي"
+            ],
+            certPrograms: [
+                "البرنامج المتكامل فى إدارة المشاريع",
+                "البرنامج المتكامل فى إدارة الموارد البشرية",
+                "برنامج إدارة التقنية والتحول الرقمي",
+                "برنامج التأهيل لامتحان زمالة الهيئة السعودية للمراجعين والمحاسبين (SOCPA Fellowship)",
+                "برنامج التخطيط الاستراتيجي وإدارة الجودة",
+                "برنامج التسويق والمبيعات",
+                "برنامج السلامة والصحة المهنية",
+                "برنامج المحاسبة والإدارة المالية",
+                "برنامج محترف إدارة المخاطر RMP",
+                "برنامج محترف إدارة المكاتب التكاملة P3O®",
+                "برنامج مساعد محترف إدارة مشاريع – تأهيل كامل لشهادة CAPM"
+            ]
+        };
+
+        // Load data from localStorage or default
+        let appState = JSON.parse(localStorage.getItem('etmam_app_luxury_state')) || defaultData;
+
+        function saveState() {
+            localStorage.setItem('etmam_app_luxury_state', JSON.stringify(appState));
+            renderAll();
+        }
+
+        // Render everything on page load
+        function renderAll() {
+            // Advice
+            document.getElementById('daily-advice-text').innerText = appState.advice;
+            document.getElementById('admin-advice-input').value = appState.advice;
+
+            // Contact & Social
+            document.getElementById('top-phone').innerHTML = `<i class="fa-solid fa-phone text-amber-400 ml-1"></i> ${appState.phone}`;
+            document.getElementById('footer-phone').innerHTML = `<i class="fa-solid fa-phone text-amber-400 ml-1"></i> ${appState.phone}`;
+            
+            document.getElementById('top-x-link').href = appState.xLink;
+            document.getElementById('footer-x-link').href = appState.xLink;
+            
+            document.getElementById('top-linkedin-link').href = appState.linkedinLink;
+            document.getElementById('footer-linkedin-link').href = appState.linkedinLink;
+
+            document.getElementById('admin-phone-input').value = appState.phone;
+            document.getElementById('admin-x-input').value = appState.xLink;
+            document.getElementById('admin-linkedin-input').value = appState.linkedinLink;
+
+            // Images
+            document.getElementById('nav-logo-img').src = appState.logoUrl;
+            document.getElementById('footer-logo-img').src = appState.logoUrl;
+            document.getElementById('hero-banner-img').src = appState.logoUrl;
+            document.getElementById('merass-logo-img').src = appState.merassLogoUrl;
+            document.getElementById('eval-img').src = appState.evalImgUrl;
+
+            document.getElementById('admin-logo-url').value = appState.logoUrl;
+            document.getElementById('admin-merass-logo-url').value = appState.merassLogoUrl;
+            document.getElementById('admin-eval-img-url').value = appState.evalImgUrl;
+
+            // Render Jobs
+            const jobsContainer = document.getElementById('jobs-container');
+            jobsContainer.innerHTML = '';
+            appState.jobs.forEach(job => {
+                jobsContainer.innerHTML += `
+                    <div class="burgundy-card p-6 rounded-2xl shadow-xl flex flex-col justify-between hover:border-amber-400 transition">
+                        <div>
+                            <div class="flex justify-between items-start gap-2 mb-3">
+                                <span class="bg-amber-950 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-600/40">${job.tag}</span>
+                                <span class="text-xs text-amber-200/70"><i class="fa-solid fa-location-dot text-amber-400 ml-1"></i>${job.location}</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-1">${job.title}</h3>
+                            <p class="text-xs font-semibold text-amber-400 mb-3">${job.company}</p>
+                            <p class="text-slate-300 text-xs leading-relaxed mb-6">${job.desc}</p>
+                        </div>
+                        <a href="https://wa.me/${appState.phone.replace(/[^0-9]/g, '')}?text=السلام عليكم، أرغب في التقديم على وظيفة: ${encodeURIComponent(job.title)}" target="_blank" class="w-full gold-gradient-btn text-slate-950 py-2.5 rounded-xl text-xs font-black text-center transition shadow flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> تقدم للوظيفة الآن
+                        </a>
+                    </div>
+                `;
+            });
+
+            // Render Admin Jobs Manager List
+            const adminJobsList = document.getElementById('admin-jobs-list');
+            adminJobsList.innerHTML = '';
+            appState.jobs.forEach(job => {
+                adminJobsList.innerHTML += `
+                    <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-lg border border-amber-900/40">
+                        <div>
+                            <span class="font-bold text-white">${job.title}</span> - <span class="text-amber-200/70">${job.company}</span>
+                        </div>
+                        <button onclick="deleteJob(${job.id})" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded text-xs font-bold transition">حذف</button>
+                    </div>
+                `;
+            });
+
+            // Render MBA Programs
+            const mbaList = document.getElementById('mba-programs-list');
+            mbaList.innerHTML = '';
+            appState.mbaPrograms.forEach(prog => {
+                mbaList.innerHTML += `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-xs"></i><span>${prog}</span></li>`;
+            });
+
+            // Render Cert Programs
+            const certList = document.getElementById('cert-programs-list');
+            certList.innerHTML = '';
+            appState.certPrograms.forEach(prog => {
+                certList.innerHTML += `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-xs"></i><span>${prog}</span></li>`;
+            });
+        }
+
+        // Admin Modal Functions
+        function openAdminModal() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+            document.getElementById('pass-error').classList.add('hidden');
+            document.getElementById('admin-pass-input').value = '';
+        }
+
+        function checkAdminPassword() {
+            const pass = document.getElementById('admin-pass-input').value;
+            // Updated Admin Password: 1234567@
+            if (pass === "1234567@") {
+                document.getElementById('admin-auth-screen').classList.add('hidden');
+                document.getElementById('admin-dashboard-screen').classList.remove('hidden');
+                document.getElementById('pass-error').classList.add('hidden');
+            } else {
+                document.getElementById('pass-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('admin-auth-screen').classList.remove('hidden');
+            document.getElementById('admin-dashboard-screen').classList.add('hidden');
+            document.getElementById('admin-pass-input').value = '';
+        }
+
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab-btn').forEach(el => {
+                el.classList.remove('gold-gradient-btn', 'text-slate-950');
+                el.classList.add('bg-black/40', 'text-slate-300', 'border', 'border-amber-900/40');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const btn = document.getElementById('btn-' + tabId);
+            btn.classList.remove('bg-black/40', 'text-slate-300', 'border', 'border-amber-900/40');
+            btn.classList.add('gold-gradient-btn', 'text-slate-950');
+        }
+
+        // Admin Actions
+        function saveDailyAdvice() {
+            const newAdvice = document.getElementById('admin-advice-input').value;
+            if (newAdvice.trim() === '') return;
+            appState.advice = newAdvice;
+            saveState();
+            showToast("تم تحديث النصيحة اليومية بنجاح!");
+        }
+
+        function addNewJob() {
+            const title = document.getElementById('new-job-title').value;
+            const company = document.getElementById('new-job-company').value;
+            const location = document.getElementById('new-job-location').value;
+            const tag = document.getElementById('new-job-tag').value;
+            const desc = document.getElementById('new-job-desc').value;
+
+            if (!title || !company) {
+                showToast("يرجى إدخال المسمى الوظيفي واسم الشركة على الأقل.");
+                return;
+            }
+
+            const newJobItem = {
+                id: Date.now(),
+                title: title,
+                company: company,
+                location: location || "السعودية",
+                tag: tag || "دوام كامل",
+                desc: desc || "لا توجد تفاصيل إضافية."
+            };
+
+            appState.jobs.unshift(newJobItem);
+            saveState();
+
+            // Clear inputs
+            document.getElementById('new-job-title').value = '';
+            document.getElementById('new-job-company').value = '';
+            document.getElementById('new-job-location').value = '';
+            document.getElementById('new-job-tag').value = '';
+            document.getElementById('new-job-desc').value = '';
+
+            showToast("تمت إضافة الوظيفة بنجاح وتحديث الموقع!");
+        }
+
+        function deleteJob(id) {
+            appState.jobs = appState.jobs.filter(job => job.id !== id);
+            saveState();
+            showToast("تم حذف الوظيفة بنجاح!");
+        }
+
+        function saveContactSettings() {
+            appState.phone = document.getElementById('admin-phone-input').value;
+            appState.xLink = document.getElementById('admin-x-input').value;
+            appState.linkedinLink = document.getElementById('admin-linkedin-input').value;
+            saveState();
+            showToast("تم تحديث معلومات الاتصال وروابط السوشيال ميديا بنجاح!");
+        }
+
+        function saveImagesSettings() {
+            appState.logoUrl = document.getElementById('admin-logo-url').value;
+            appState.merassLogoUrl = document.getElementById('admin-merass-logo-url').value;
+            appState.evalImgUrl = document.getElementById('admin-eval-img-url').value;
+            saveState();
+            showToast("تم تحديث الصور والشعارات بنجاح!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            renderAll();
+        };
+    </script>
+</body>
+</html>
